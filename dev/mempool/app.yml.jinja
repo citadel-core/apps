@@ -1,0 +1,130 @@
+# SPDX-FileCopyrightText: 2021 Bastien Guillaumat <bastien.guillaumat@gmail.com>
+#
+# SPDX-License-Identifier: AGPL-3.0-only
+
+# yaml-language-server: $schema=../../app-standard-v4.yml
+
+citadel_version: 4
+
+metadata:
+  category: Explorers
+  name: Mempool
+  version: 2.4.0
+  tagline: A mempool visualizer, explorer and fee estimator
+  description: >-
+    Mempool is the official self-hosted version of the fully featured explorer,
+    visualizer, fee estimator, and API service running on mempool.space, an open
+    source project developed and operated for the benefit of the Bitcoin
+    community, with a focus on the emerging transaction fee market to help our
+    transition into a multi-layer ecosystem.
+
+
+    Features:
+
+
+    - Live dashboard visualizing the mempool and blockchain
+
+    - Live transaction tracking
+
+    - Search any transaction, block or address
+
+    - Fee estimations
+
+    - Mempool historical data
+
+    - TV View for larger displays as a TV in a cafe or bar
+
+    - View transaction scripts and op_return messages
+
+    - Audio notifications on transaction confirmed and address balance change
+
+    - Multiple languages support
+
+    - JSON APIs
+  developers:
+    mempool.space: https://mempool.space/about
+  permissions:
+    - electrum
+    - bitcoind
+  {% if services is containing("lnd") %}
+    - lnd
+  {% elif services is containing("c-lightning") %}
+    - c-lightning
+  {% endif %}
+  repo:
+    Public: https://github.com/mempool/mempool
+  support: https://t.me/mempoolspace
+  gallery:
+    - 1.jpg
+    - 2.jpg
+    - 3.jpg
+
+services:
+  main:
+    image: mempool/frontend:v2.5.0-dev1@sha256:065f72100a963d7fad6a02faf29edd3aa643f949a550dc813ae5d35be2315c4c
+    user: 1000:1000
+    port: 3000
+    init: true
+    command: ./wait-for mariadb:3306 --timeout=720 -- nginx -g 'daemon off;'
+    environment:
+      FRONTEND_HTTP_PORT: "3000"
+      BACKEND_MAINNET_HTTP_HOST: $APP_MEMPOOL_API_IP
+  api:
+    image: mempool/backend:v2.5.0-dev1@sha256:e0e206dcc81ad492344e28f9bc19d3d749bc93e8edbbd197511a8ebbd91b7565
+    user: 1000:1000
+    init: true
+    command: ./wait-for-it.sh mariadb:3306 --timeout=720 --strict -- ./start.sh
+    environment:
+      CORE_RPC_HOST: $BITCOIN_IP
+      CORE_RPC_PORT: $BITCOIN_RPC_PORT
+      CORE_RPC_USERNAME: $BITCOIN_RPC_USER
+      CORE_RPC_PASSWORD: $BITCOIN_RPC_PASS
+      ELECTRUM_HOST: $ELECTRUM_IP
+      ELECTRUM_PORT: $ELECTRUM_PORT
+      ELECTRUM_TLS: "false"
+      DATABASE_HOST: $APP_MEMPOOL_MARIADB_IP
+      DATABASE_PORT: "3306"
+      DATABASE_DATABASE: mempool
+      DATABASE_USER: mempool
+      DATABASE_PASS: mempool
+      MEMPOOL_HTTP_PORT: "8999"
+      MEMPOOL_CACHE_DIR: /backend/cache
+      MEMPOOL_CLEAR_PROTECTION_MINUTES: "20"
+      LIGHTNING_TOPOLOGY_FOLDER: "/lightning"
+      LIGHTNING_STATS_REFRESH_INTERVAL: "600"
+      LIGHTNING_GRAPH_REFRESH_INTERVAL: "600"
+      LIGHTNING_LOGGER_UPDATE_INTERVAL: "30"
+    {% if services is containing("lnd") %}
+      LIGHTNING_ENABLED: "true"
+      LIGHTNING_BACKEND: lnd
+      LND_TLS_CERT_PATH: /lnd/tls.cert
+      LND_MACAROON_PATH: /lnd/data/chain/bitcoin/$BITCOIN_NETWORK/admin.macaroon
+      LND_REST_API_URL: https://$LND_IP:$LND_REST_PORT/
+    {% elif services is containing("c-lightning") %}
+      LIGHTNING_ENABLED: "true"
+      LIGHTNING_BACKEND: "cln"
+      CLIGHTNING_SOCKET: "/c-lightning/bitcoin/lightning-rpc"
+    {% else %}
+      LIGHTNING_ENABLED: "false"
+    {% endif %}
+    mounts:
+    {% if services is containing("lnd") %}
+      lnd: /lnd
+    {% elif services is containing("c-lightning") %}
+      c_lightning: /c-lightning
+    {% endif %}
+      data:
+        data: /backend/cache
+        lightning: /lightning
+  mariadb:
+    image: mariadb:10.7.1@sha256:a469ba5edc9267eb3f32f5a6773376677274b09d36bbe742b448fc4c787e6b37
+    user: 1000:1000
+    environment:
+      MYSQL_DATABASE: mempool
+      MYSQL_USER: mempool
+      MYSQL_PASSWORD: mempool
+      MYSQL_ROOT_PASSWORD: moneyprintergobrrr
+    mounts:
+      data:
+          mysql/db-scripts: /docker-entrypoint-initdb.d
+          mysql/data: /var/lib/mysql
