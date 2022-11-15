@@ -1,0 +1,12 @@
+store_version: 1
+
+id: citadel
+name: Citadel app store
+tagline: The official app store by the Citadel team
+developers: The Citadel developers
+license: AGPL-3.0-or-later
+
+content:
+  # A map between minimum Citadel version -> apps subdir
+  v0.1.0: v4
+
