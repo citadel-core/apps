@@ -5,6 +5,7 @@ name: Citadel app store
 tagline: The official app store by the Citadel team
 developers: The Citadel developers
 license: AGPL-3.0-or-later
+icon: https://icons.runcitadel.space/app-stores/main.svg
 
 content:
   # A map between minimum Citadel app-manager version -> apps subdir
