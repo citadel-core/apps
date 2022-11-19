@@ -7,6 +7,6 @@ developers: The Citadel developers
 license: AGPL-3.0-or-later
 
 content:
-  # A map between minimum Citadel version -> apps subdir
-  v0.1.0: v4
+  # A map between minimum Citadel app-manager version -> apps subdir
+  v0.4.0: v4
 
