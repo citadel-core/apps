@@ -67,10 +67,10 @@ services:
   neutrino-switcher:
     image: lncm/neutrino-switcher:1.0.5@sha256:3ddf58c5599ba22db8414f2694bfeeba086455d4a19b4955b26c3ae5e967d42a
     restart: on-failure
-    volumes:
-    - ${PWD}/lnd:/lnd
-    - ${PWD}/statuses:/statuses
-    - /var/run/docker.sock:/var/run/docker.sock
+    mounts:
+      data:
+        lnd: /lnd
+        statuses: /statuses
     environment:
       JSONRPCURL: http://${BITCOIN_IP}:${BITCOIN_RPC_PORT}
       RPCUSER: $BITCOIN_RPC_USER
@@ -78,6 +78,3 @@ services:
       # TODO: Find another way of restarting, we can't give apps full root access to docker
       LND_CONTAINER_NAME: lightning
       SLEEPTIME: 3600
-    networks:
-      default:
-        ipv4_address: $NEUTRINO_SWITCHER_IP
