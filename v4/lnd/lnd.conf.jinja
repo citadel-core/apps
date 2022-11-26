@@ -1,0 +1,67 @@
+# SPDX-FileCopyrightText: 2021-2022 Citadel and contributors.
+#
+# SPDX-License-Identifier: GPL-3.0-or-later
+
+[Application Options]
+listen=0.0.0.0:9735
+rpclisten=0.0.0.0:10009
+restlisten=0.0.0.0:8080
+accept-keysend=true
+tlsextraip={{APP_LND_SERVICE_IP}}
+tlsextradomain={{DEVICE_HOSTNAME}}.local
+tlsautorefresh=1
+tlsdisableautofill=1
+{% set mainnet = "mainnet" %}
+{% if BITCOIN_NETWORK == mainnet %}
+feeurl=https://nodes.lightning.computer/fees/v1/btc-fee-estimates.json
+{% endif %}
+wallet-unlock-password-file=/walletpassword
+wallet-unlock-allow-create=true
+gc-canceled-invoices-on-startup=true
+gc-canceled-invoices-on-the-fly=true
+accept-amp=true
+
+[protocol]
+; Allow channels larger than 0.16 BTC
+protocol.wumbo-channels=true
+
+[Bitcoind]
+bitcoind.rpchost={{BITCOIN_IP}}:{{BITCOIN_RPC_PORT}}
+bitcoind.rpcuser={{BITCOIN_RPC_USER}}
+bitcoind.rpcpass={{BITCOIN_RPC_PASS}}
+bitcoind.zmqpubrawblock=tcp://{{BITCOIN_IP}}:{{BITCOIN_ZMQ_RAWBLOCK_PORT}}
+bitcoind.zmqpubrawtx=tcp://{{BITCOIN_IP}}:{{BITCOIN_ZMQ_RAWTX_PORT}}
+
+[Bitcoin]
+bitcoin.active=1
+bitcoin.{{BITCOIN_NETWORK}}=1
+# Default to neutrino as the node is 
+# automatically switched to bitcoind once
+# IBD is complete
+bitcoin.node=neutrino
+bitcoin.defaultchanconfs=2
+bitcoin.basefee=0
+
+{% set testnet = "testnet" %}
+{% if BITCOIN_NETWORK == testnet %}
+[neutrino]
+neutrino.addpeer=testnet1-btcd.zaphq.io
+neutrino.addpeer=testnet2-btcd.zaphq.io
+{% endif %}
+
+; Enable watchtower to watch other nodes
+[watchtower]
+watchtower.active=1
+
+; activate watchtower client so we can get get other servers
+; to make sure no one steals our money
+[wtclient]
+wtclient.active=1
+
+[tor]
+tor.active=1
+tor.control={{APP_LND_TOR_IP}}:29051
+tor.socks={{APP_LND_TOR_IP}}:9050
+tor.targetipaddress={{APP_LND_SERVICE_IP}}
+tor.password={{APP_SEED}}
+tor.v3=1

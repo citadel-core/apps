@@ -1,0 +1,8 @@
+# SPDX-FileCopyrightText: 2021-2022 Citadel and contributors.
+#
+# SPDX-License-Identifier: GPL-3.0-or-later
+
+SocksPort   {{APP_LND_TOR_IP}}:9050
+ControlPort {{APP_LND_TOR_IP}}:29051
+
+HashedControlPassword {{ APP_SEED | tor_hash }}

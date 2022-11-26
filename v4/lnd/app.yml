@@ -1,0 +1,83 @@
+citadel_version: 4
+metadata:
+  name: LND
+  version: 0.15.4-beta
+  category: Run a Lightning node
+  tagline: An open-source Lightning backend
+  developers:
+    Lightning Labs: https://github.com/lightningnetwork/lnd
+  permissions:
+    - bitcoind
+  repo:
+    Public: ttps://github.com/lightningnetwork/lnd
+  support: https://t.me/runcitadel
+  gallery:
+    - 1.jpg
+    - 2.jpg
+    - 3.jpg
+  path: ""
+  defaultPassword: $APP_SEED
+  torOnly: false
+  description: >-
+    LND offers a complete Lightning node that works even while your Bitcoin node is still syncing.
+services:
+  main:
+    # TODO: LND UI
+    image: ghcr.io/runcitadel/electrum-ui:main@sha256:d3d8126aecd6ee142f4a34900de2c1f3c8e0493ac30b93f1db3f4c1b33bad6ef
+    init: true
+    port: 8000
+    environment:
+      BITCOIN_IP: $BITCOIN_IP
+      BITCOIN_RPC_PORT: $BITCOIN_RPC_PORT
+      BITCOIN_RPC_USER: $BITCOIN_RPC_USER
+      BITCOIN_RPC_PASS: $BITCOIN_RPC_PASS
+      # Using a public server right now
+      ELECTRUM_IP: 104.248.139.211
+      ELECTRUM_PORT: 50001
+    restart: on-failure
+
+  tor:
+    image: lncm/tor:0.4.7.9@sha256:86c2fe9d9099e6376798979110b8b9a3ee5d8adec27289ac4a5ee892514ffe92
+    user: toruser
+    restart: on-failure
+    mounts:
+      data:
+        torrc: /etc/tor/torrc
+        tor: /var/lib/tor/
+
+  service:
+    image: lightninglabs/lnd:v0.15.4-beta@sha256:f5b19812ab7d28faa350838dac4bb88e7fcf9ae905e44d3539be41a97b80ca23
+    user: 1000:1000
+    mounts:
+      data:
+        walletpassword: /walletpassword
+        lnd.conf: /data/.lnd/lnd.conf
+      shared_data:
+        lnd: /data/.lnd
+    environment:
+      HOME: /data
+    restart: on-failure
+    stop_grace_period: 5m30s
+    required_ports:
+      tcp:
+        9735: 9735
+        10009: 10009
+        8080: 8080
+
+  neutrino-switcher:
+    image: lncm/neutrino-switcher:1.0.5@sha256:3ddf58c5599ba22db8414f2694bfeeba086455d4a19b4955b26c3ae5e967d42a
+    restart: on-failure
+    volumes:
+    - ${PWD}/lnd:/lnd
+    - ${PWD}/statuses:/statuses
+    - /var/run/docker.sock:/var/run/docker.sock
+    environment:
+      JSONRPCURL: http://${BITCOIN_IP}:${BITCOIN_RPC_PORT}
+      RPCUSER: $BITCOIN_RPC_USER
+      RPCPASS: $BITCOIN_RPC_PASS
+      # TODO: Find another way of restarting, we can't give apps full root access to docker
+      LND_CONTAINER_NAME: lightning
+      SLEEPTIME: 3600
+    networks:
+      default:
+        ipv4_address: $NEUTRINO_SWITCHER_IP
