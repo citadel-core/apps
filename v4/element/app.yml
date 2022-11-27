@@ -1,0 +1,25 @@
+citadel_version: 4
+
+metadata:
+  category: Social
+  name: Element
+  version: 1.11.15
+  tagline: A glossy Matrix client compatible with Synapse
+  description: >-
+    Element is a new type of messaging app. You choose where your messages
+    are stored, putting you in control of your data.
+  developers:
+    New Vector Ltd: https://element.io
+  dependencies: []
+  repo:
+    Public: https://github.com/vector-im/element-web
+  support: https://matrix.to/#/#element-web:matrix.org
+  gallery:
+  - 1.jpg
+  - 2.jpg
+  - 3.jpg
+
+services:
+  main:
+    image: vectorim/element-web:v1.11.15@sha256:aecc84718746ac455556dcb60a3ad0674c44792bd9e472cd5886da1b0afe6bd3
+    port: 80
