@@ -9,7 +9,7 @@ metadata:
   permissions:
     - bitcoind
   repo:
-    Public: ttps://github.com/lightningnetwork/lnd
+    Public: https://github.com/lightningnetwork/lnd
   support: https://t.me/runcitadel
   gallery:
     - 1.jpg
@@ -20,6 +20,7 @@ metadata:
   torOnly: false
   description: >-
     LND offers a complete Lightning node that works even while your Bitcoin node is still syncing.
+  implements: lightning
 services:
   main:
     # TODO: LND UI

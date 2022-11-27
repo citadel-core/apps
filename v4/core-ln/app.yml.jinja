@@ -1,0 +1,61 @@
+citadel_version: 4
+metadata:
+  name: Core Lightning
+  version: 0.12.1
+  category: Run a Lightning node
+  tagline: An open-source Lightning backend
+  developers:
+    Lightning Labs: https://github.com/lightningnetwork/lnd
+  permissions:
+    - bitcoind
+  repo:
+    Public: https://github.com/ElementsProject/lightning
+  support: https://t.me/runcitadel
+  gallery:
+    - 1.jpg
+    - 2.jpg
+    - 3.jpg
+  path: ""
+  torOnly: false
+  description: >-
+   Core Lightning has more features, but is supported by less apps than LND and only works after sync.
+  implements: lightning
+services:
+  main:
+    # TODO: CLN UI
+    image: ghcr.io/runcitadel/electrum-ui:main@sha256:d3d8126aecd6ee142f4a34900de2c1f3c8e0493ac30b93f1db3f4c1b33bad6ef
+    init: true
+    port: 8000
+    environment:
+      BITCOIN_IP: $BITCOIN_IP
+      BITCOIN_RPC_PORT: $BITCOIN_RPC_PORT
+      BITCOIN_RPC_USER: $BITCOIN_RPC_USER
+      BITCOIN_RPC_PASS: $BITCOIN_RPC_PASS
+      # Using a public server right now
+      ELECTRUM_IP: 104.248.139.211
+      ELECTRUM_PORT: 50001
+    restart: on-failure
+
+  service:
+    image: ghcr.io/runcitadel/core-ln:main@sha256:b3bcec2155d7bcb615e865cf3ec2368db51bcb52a231ea207a308c915797e387
+    user: 1000:1000
+    mounts:
+      shared_data:
+        cln: /data/.lightning
+    environment:
+      LIGHTNINGD_NETWORK: bitcoin
+      {% set mainnet = "mainnet" %}
+      {% if BITCOIN_NETWORK == mainnet %}
+      LIGHTNINGD_NETWORK: bitcoin
+      {% else %}
+      LIGHTNINGD_NETWORK: $BITCOIN_NETWORK
+      {% endif %}
+      CL_REST_STATE_DIR: /data/.lightning
+    restart: on-failure
+    stop_grace_period: 5m30s
+    required_ports:
+      tcp:
+        9737: 9737
+        9735: 9735
+    hidden_services:
+      9735: 9735

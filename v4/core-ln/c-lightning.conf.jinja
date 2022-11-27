@@ -1,0 +1,39 @@
+<bitcoin-network>
+
+bitcoin-datadir=/data/.bitcoin
+
+bitcoin-rpcuser={{BITCOIN_RPC_USER}}
+
+bitcoin-rpcpassword={{BITCOIN_RPC_PASS}}
+
+bitcoin-rpcconnect={{BITCOIN_IP}}
+
+bitcoin-rpcport={{BITCOIN_RPC_PORT}}
+
+experimental-onion-messages
+
+experimental-offers
+
+bind-addr=0.0.0.0:9735
+
+announce-addr={{APP_HIDDEN_SERVICE_SERVICE}}
+
+proxy={{TOR_PROXY_IP}}:{{TOR_PROXY_PORT}}
+
+always-use-proxy=true
+
+sparko-host=0.0.0.0
+sparko-port=9737
+
+# the tls path is just the directory where your self-signed key and certificate are.
+# (see below for code snippets that generate them on Linux)
+# the path is relative to your lightning-dir, so "sparko-tls" will translate to "~/.lightning/bitcoin/sparko-tls/"
+# (you can also use an absolute path)
+# if not specified the app will run without TLS (as http://)
+sparko-tls-path=sparko-tls
+
+# login credentials for using the wallet app.
+# under the hood these are translated into an access key with full access.
+# the default login is none, which doesn't allow you to use the wallet app,
+#   but you can still use the /rpc endpoint with other keys specified at sparko-keys=
+sparko-login=citadel:{{APP_SEED_2}}

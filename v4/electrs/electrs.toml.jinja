@@ -1,5 +1,6 @@
 log_filters = "INFO"
-{% if BITCOIN_NETWORK == "mainnet" %}
+{% set mainnet = "mainnet" %}
+{% if BITCOIN_NETWORK == mainnet %}
 network = "bitcoin"
 {% else %}
 network = "{{ BITCOIN_NETWORK }}"
