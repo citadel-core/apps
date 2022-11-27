@@ -52,7 +52,7 @@ services:
     command:
     - --app-seed=$APP_SEED_2
     - $BITCOIN_NETWORK
-    - --electrum=tcp://$ELECTRUM_IP:$ELECTRUM_PORT
+    - --electrum=tcp://$APP_ELECTRUM_IP:50001
     environment:
       ITCHYSATS_ENV: citadel
     port: 8000

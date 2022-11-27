@@ -61,7 +61,7 @@ containers:
       BTC_HOST: $APP_BITCARTCC_BITCOIN_IP
       BTC_NETWORK: $BITCOIN_NETWORK
       BTC_LIGHTNING: true
-      BTC_SERVER: $ELECTRUM_IP:$ELECTRUM_PORT:t
+      BTC_SERVER: $APP_ELECTRUM_IP:50001:t
     data:
       - data/bitcoin:/data
   - name: database
