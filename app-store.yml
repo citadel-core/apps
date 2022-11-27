@@ -10,4 +10,5 @@ icon: https://icons.runcitadel.space/app-stores/main.svg
 content:
   # A map between minimum Citadel app-manager version -> apps subdir
   v0.4.0: v4
+  v0.5.0: v5
 
