@@ -1,0 +1,65 @@
+# SPDX-FileCopyrightText: 2021 Jonathan Zernik
+#
+# SPDX-License-Identifier: AGPL-3.0-only
+
+# yaml-language-server: $schema=../../app-standard-v3.yml
+
+version: 3
+metadata:
+  category: Social
+  name: Squeaknode
+  version: 0.3.5
+  tagline: A peer-to-peer status feed with Lightning monetization
+  description: >-
+    The Squeaknode app allows you to create, view, buy, and sell squeaks. A
+    squeak is a single post that can contain up to 280 characters.
+
+
+    The Squeaknode timeline is ordered by the height of the block hash embedded in each squeak. Each squeak is signed with a digital signature of the private key of the author. Squeaks can be downloaded from any peer to any peer, but they remain locked until the downloader makes a Lightning payment to decrypt the content.
+  developers:
+    Jonathan Zernik: https://github.com/yzernik
+  dependencies:
+    - bitcoind
+    - lnd
+  repo: https://github.com/squeaknode/squeaknode
+  support: https://github.com/squeaknode/squeaknode/discussions
+  gallery:
+    - 1.jpg
+    - 2.jpg
+    - 3.jpg
+  path: /login?user=citadel
+  defaultPassword: $APP_SEED
+containers:
+  - name: web
+    image: ghcr.io/squeaknode/squeaknode:v0.3.5@sha256:1c34495118d469a6a66ffdf6d9be8c33ef92b068cb4b909b98d8f7950d77795c
+    stop_grace_period: 1m
+    port: 12994
+    requiredPorts:
+      - 8994
+    user: 1000:1000
+    environment:
+      SQUEAKNODE_BITCOIN_RPC_HOST: $BITCOIN_IP
+      SQUEAKNODE_BITCOIN_RPC_PORT: $BITCOIN_RPC_PORT
+      SQUEAKNODE_BITCOIN_RPC_USER: $BITCOIN_RPC_USER
+      SQUEAKNODE_BITCOIN_RPC_PASS: $BITCOIN_RPC_PASS
+      SQUEAKNODE_LIGHTNING_BACKEND: lnd
+      SQUEAKNODE_LIGHTNING_LND_RPC_HOST: $LND_IP
+      SQUEAKNODE_LIGHTNING_LND_RPC_PORT: $LND_GRPC_PORT
+      SQUEAKNODE_LIGHTNING_LND_TLS_CERT_PATH: /lnd/tls.cert
+      SQUEAKNODE_LIGHTNING_LND_MACAROON_PATH: /lnd/data/chain/bitcoin/$BITCOIN_NETWORK/admin.macaroon
+      SQUEAKNODE_WEBADMIN_ENABLED: "true"
+      SQUEAKNODE_WEBADMIN_USERNAME: citadel
+      SQUEAKNODE_WEBADMIN_PASSWORD: ${APP_SEED}
+      SQUEAKNODE_NODE_NETWORK: $BITCOIN_NETWORK
+      SQUEAKNODE_NODE_SQK_DIR_PATH: /sqk
+      SQUEAKNODE_NODE_MAX_SQUEAKS: 10000
+      SQUEAKNODE_TOR_PROXY_IP: $TOR_PROXY_IP
+      SQUEAKNODE_TOR_PROXY_PORT: $TOR_PROXY_PORT
+      SQUEAKNODE_SERVER_EXTERNAL_ADDRESS: $APP_HIDDEN_SERVICE_P2P
+      DEBUG: squeaknode:*
+    data:
+      - sqk:/sqk
+    hiddenServicePorts:
+      p2p:
+        - 8555
+        - 18555

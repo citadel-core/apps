@@ -1,0 +1,30 @@
+citadel_version: 4
+metadata:
+  name: code-server
+  version: 4.8.1
+  category: Development
+  tagline: Run VS Code on your Citadel
+  developers:
+    Coder: https://coder.com
+  description: This app doesn't  have a description yet.
+  permissions: []
+  repo:
+    Public: https://github.com/cdr/code-server
+  support: https://github.com/cdr/code-server/discussions
+  gallery:
+  - 1.jpg
+  - 2.jpg
+  - 3.jpg
+  defaultPassword: $APP_SEED
+  torOnly: false
+  compatible: false
+services:
+  main:
+    image: codercom/code-server:4.8.1@sha256:fe86fffd0a6924465d2cfb55c92a83cef7a0a2be69546a3b8b7dac94671d4129
+    user: 1000:1000
+    environment:
+      PASSWORD: $APP_SEED
+    port: 8080
+    mounts:
+      data:
+        data: /home/coder

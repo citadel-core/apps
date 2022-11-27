@@ -1,0 +1,56 @@
+# yaml-language-server: $schema=../../app-standard-v4.yml
+
+citadel_version: 4
+
+metadata:
+  name: Electrs
+  version: 0.9.9
+  category: Electrum Servers
+  tagline: Lightweight Electrum server
+  developers:
+    Roman Zeyde: https://github.com/romanz
+  permissions:
+    - bitcoind
+  repo:
+    Electrs: https://github.com/romanz/electrs
+    Container: https://github.com/runcitadel/docker-electrs
+  support: https://t.me/runcitadel/
+  gallery:
+  - 1.jpg
+  - 2.jpg
+  - 3.jpg
+  description: |-
+    Electrs is a lightweight Electrum server for personal use.
+    
+    It's slower than Fulcrum, but uses less CPU, RAM and disk space.
+  implements: electrum
+
+services:
+  main:
+    image: ghcr.io/runcitadel/electrum-ui:main@sha256:d3d8126aecd6ee142f4a34900de2c1f3c8e0493ac30b93f1db3f4c1b33bad6ef
+    init: true
+    port: 8000
+    environment:
+      BITCOIN_IP: $BITCOIN_IP
+      BITCOIN_RPC_PORT: $BITCOIN_RPC_PORT
+      BITCOIN_RPC_USER: $BITCOIN_RPC_USER
+      BITCOIN_RPC_PASS: $BITCOIN_RPC_PASS
+      ELECTRUM_IP: $APP_ELECTRS_SERVICE_IP
+      ELECTRUM_PORT: 50001
+    restart: on-failure
+
+  service:
+    image: ghcr.io/runcitadel/electrs:v0.9.9@sha256:9751e0d16130cab592dc18ddf2677300600c51843a86bb677821df912d532d52
+    working_dir: /data
+    mounts:
+      bitcoin: /bitcoin
+      data:
+        data: /data
+        electrs.toml: /data/electrs.toml
+    restart: on-failure
+    stop_grace_period: 5m
+    required_ports:
+      tcp:
+        50001: 50001
+    hidden_services:
+      50001: 50001
