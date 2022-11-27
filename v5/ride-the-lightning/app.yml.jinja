@@ -18,11 +18,11 @@ metadata:
   permissions:
   {% if services is containing("lnd") %}
     - lnd
-  {% elif services is containing("c-lightning") %}
-    - c-lightning
+  {% elif services is containing("core-ln") %}
+    - core-ln
   {% else %}
     - - lnd
-      - c-lightning
+      - core-ln
   {% endif %}
     - bitcoind
   repo:
@@ -89,18 +89,18 @@ services:
       SWAP_MACAROON_PATH: /loop/.loop/$BITCOIN_NETWORK
       BOLTZ_SERVER_URL: https://$APP_RIDE_THE_LIGHTNING_BOLTZ_IP:9003
       BOLTZ_MACAROON_PATH: /boltz/.boltz-lnd/macaroons
-    {% elif services is containing("c-lightning") %}
+    {% elif services is containing("core-ln") %}
       LN_IMPLEMENTATION: CLT
-      LN_SERVER_URL: https://$C_LIGHTNING_IP:3001
-      MACAROON_PATH: /c-lightning/certs
-      CONFIG_PATH: /c-lightning/config
+      LN_SERVER_URL: https://$APP_CORE_LIGHTNING_SERVICE_IP:3001
+      MACAROON_PATH: /core-ln/certs
+      CONFIG_PATH: /core-ln/config
       ENABLE_OFFERS: "true"
     {% endif %}
     mounts:
     {% if services is containing("lnd") %}
       lnd: /lnd
-    {% elif services is containing("c-lightning") %}
-      c_lightning: /c-lightning
+    {% elif services is containing("core-ln") %}
+      core-ln: /core-ln
     {% endif %}
       data:
     {% if services is containing("lnd") %}

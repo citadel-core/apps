@@ -48,8 +48,8 @@ metadata:
     - bitcoind
   {% if services is containing("lnd") %}
     - lnd
-  {% elif services is containing("c-lightning") %}
-    - c-lightning
+  {% elif services is containing("core-ln") %}
+    - core-ln
   {% endif %}
   repo:
     Public: https://github.com/mempool/mempool
@@ -100,7 +100,7 @@ services:
       LND_TLS_CERT_PATH: /lnd/tls.cert
       LND_MACAROON_PATH: /lnd/data/chain/bitcoin/$BITCOIN_NETWORK/admin.macaroon
       LND_REST_API_URL: https://$LND_IP:$LND_REST_PORT/
-    {% elif services is containing("c-lightning") %}
+    {% elif services is containing("core-ln") %}
       LIGHTNING_ENABLED: "true"
       LIGHTNING_BACKEND: "cln"
       CLIGHTNING_SOCKET: "/c-lightning/bitcoin/lightning-rpc"
@@ -110,8 +110,8 @@ services:
     mounts:
     {% if services is containing("lnd") %}
       lnd: /lnd
-    {% elif services is containing("c-lightning") %}
-      c_lightning: /c-lightning
+    {% elif services is containing("core-ln") %}
+      core-ln: /c-lightning
     {% endif %}
       data:
         data: /backend/cache

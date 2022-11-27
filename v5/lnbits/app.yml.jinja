@@ -9,11 +9,11 @@ metadata:
   permissions:
   {% if services is containing("lnd") %}
     - lnd
-  {% elif services is containing("c-lightning") %}
-    - c-lightning
+  {% elif services is containing("core-ln") %}
+    - core-ln
   {% else %}
     - - lnd
-      - c-lightning
+      - core-ln
   {% endif %}
   repo:
     Public: https://github.com/lnbits/lnbits
@@ -43,7 +43,7 @@ services:
       LND_REST_CERT: /lnd/tls.cert
       LND_REST_MACAROON: /lnd/data/chain/bitcoin/$BITCOIN_NETWORK/admin.macaroon
       LND_REST_ENDPOINT: https://$LND_IP:$LND_REST_PORT/
-    {% elif services is containing("c-lightning") %}
+    {% elif services is containing("core-ln") %}
       CLIGHTNING_RPC: /c-lightning/bitcoin/lightning-rpc
       LNBITS_BACKEND_WALLET_CLASS: CLightningWallet
     {% endif %}
@@ -51,8 +51,8 @@ services:
     mounts:
     {% if services is containing("lnd") %}
       lnd: /lnd
-    {% elif services is containing("c-lightning") %}
-      c_lightning: /c-lightning
+    {% elif services is containing("core-ln") %}
+      core-ln: /c-lightning
     {% endif %}
       data:
         data: /data
