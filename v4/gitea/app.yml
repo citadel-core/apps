@@ -46,7 +46,7 @@ services:
       GITEA__server__SSH_PORT: 2222
       GITEA__server__SSH_LISTEN_PORT: 2222
       GITEA__server__SSH_DOMAIN: ${APP_DOMAIN}
-    requiredPorts:
+    required_ports:
       tcp:
         2222: 2222
     user: 1000:1000
