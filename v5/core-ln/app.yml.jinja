@@ -43,9 +43,7 @@ services:
       shared_data:
         cln: /data/.lightning
     environment:
-      LIGHTNINGD_NETWORK: bitcoin
-      {% set mainnet = "mainnet" %}
-      {% if BITCOIN_NETWORK == mainnet %}
+      {% if BITCOIN_NETWORK == "mainnet" %}
       LIGHTNINGD_NETWORK: bitcoin
       {% else %}
       LIGHTNINGD_NETWORK: $BITCOIN_NETWORK
