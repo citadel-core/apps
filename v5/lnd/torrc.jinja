@@ -5,4 +5,4 @@
 SocksPort   {{APP_LND_TOR_IP}}:9050
 ControlPort {{APP_LND_TOR_IP}}:29051
 
-HashedControlPassword {{ APP_SEED | tor_hash }}
+HashedControlPassword {{ tor_password | tor_hash }}

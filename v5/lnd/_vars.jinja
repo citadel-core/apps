@@ -1,0 +1,3 @@
+The contents of this file are completely ignored, so you can write comments here without any specific syntax
+For LND, we define tor_password here, because APP_SEED may not be available (LND is required for APP_SEED to be generated)
+{% set_global tor_password = gen_seed(len=32) %}
