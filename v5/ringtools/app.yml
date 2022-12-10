@@ -27,7 +27,7 @@ containers:
     image: ghcr.io/runcitadel/ringtools:main@sha256:9dca53ae92b962299bd26fe7855d7cc3810975fc42d8c3039ea256404811813d
     environment:
       PORT: $APP_RINGTOOLS_MAIN_PORT
-      LND_REST_API_WS: wss://$LND_IP:$LND_REST_PORT
-      LND_REST_API: https://$LND_IP:$LND_REST_PORT
+      LND_REST_API_WS: wss://$APP_LND_SERVICE_IP:8080
+      LND_REST_API: https://$APP_LND_SERVICE_IP:8080
       MACAROON_FILE: /lnd/data/chain/bitcoin/$BITCOIN_NETWORK/readonly.macaroon
       TLS_CERT_FILE: /lnd/tls.cert

@@ -30,7 +30,7 @@ services:
     environment:
       API_URL: https://lightningnetwork.plus/api/2/
       LN_IMPLEMENTATION: LND
-      LN_SERVER_URL: $LND_IP:$LND_GRPC_PORT/
+      LN_SERVER_URL: $APP_LND_SERVICE_IP:10009/
       MACAROON_PATH: /lnd/data/chain/bitcoin/$BITCOIN_NETWORK/admin.macaroon
       CONFIG_PATH: /lnd/lnd.conf
       RAILS_ENV: development

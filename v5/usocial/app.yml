@@ -35,8 +35,8 @@ containers:
     environment:
       USOCIAL_JOB: WEB
       APP_PASSWORD: ${APP_SEED}
-      LND_IP: ${LND_IP}
-      LND_GRPC_PORT: ${LND_GRPC_PORT}
+      LND_IP: ${APP_LND_SERVICE_IP}
+      LND_GRPC_PORT: 10009
       LND_DIR: /lnd
   - name: fetcher
     depends_on:

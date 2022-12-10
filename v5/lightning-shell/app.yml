@@ -36,5 +36,5 @@ containers:
     environment:
       APP_PASSWORD: ${APP_SEED}
       USERNAME: citadel
-      LND_IP: ${LND_IP}
-      LND_GRPC_PORT: ${LND_GRPC_PORT}
+      LND_IP: ${APP_LND_SERVICE_IP}
+      LND_GRPC_PORT: 10009

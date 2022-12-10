@@ -52,7 +52,7 @@ services:
     restart: on-failure
     init: true
     environment:
-      LND_IP: $LND_IP
+      LND_IP: $APP_LND_SERVICE_IP
       LND_ZMQ_SUB_ADDRESS: tcp://${APP_KOLLIDER_WS_IP}:5556
     mounts:
       lnd: /lnd

@@ -43,7 +43,7 @@ services:
       HOME: /data
     command:
       - --network=$BITCOIN_NETWORK
-      - --lnd.host="$LND_IP:$LND_GRPC_PORT"
+      - --lnd.host="$APP_LND_SERVICE_IP:10009"
       - --lnd.macaroonpath="/lnd/data/chain/bitcoin/$BITCOIN_NETWORK/admin.macaroon"
       - --lnd.tlspath="/lnd/tls.cert"
       - --restlisten=0.0.0.0:8081
@@ -64,7 +64,7 @@ services:
       data:
           boltz: /data
     command:
-      - --lnd.host="$LND_IP"
+      - --lnd.host="$APP_LND_SERVICE_IP"
       - --lnd.macaroon="/lnd/data/chain/bitcoin/$BITCOIN_NETWORK/admin.macaroon"
       - --lnd.certificate="/lnd/tls.cert"
       - --rpc.rest.host="$APP_RIDE_THE_LIGHTNING_BOLTZ_IP"
@@ -82,7 +82,7 @@ services:
       CHANNEL_BACKUP_PATH: /data/backup
     {% if services is containing("lnd") %}
       LN_IMPLEMENTATION: LND
-      LN_SERVER_URL: https://$LND_IP:$LND_REST_PORT
+      LN_SERVER_URL: https://$APP_LND_SERVICE_IP:8080
       MACAROON_PATH: /lnd/data/chain/bitcoin/$BITCOIN_NETWORK
       CONFIG_PATH: /lnd/lnd.conf
       SWAP_SERVER_URL: https://$APP_RIDE_THE_LIGHTNING_LOOP_IP:8081

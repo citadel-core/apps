@@ -42,7 +42,7 @@ services:
       LNBITS_BACKEND_WALLET_CLASS: LndRestWallet
       LND_REST_CERT: /lnd/tls.cert
       LND_REST_MACAROON: /lnd/data/chain/bitcoin/$BITCOIN_NETWORK/admin.macaroon
-      LND_REST_ENDPOINT: https://$LND_IP:$LND_REST_PORT/
+      LND_REST_ENDPOINT: https://$APP_LND_SERVICE_IP:8080/
     {% elif services is containing("core-ln") %}
       CLIGHTNING_RPC: /c-lightning/bitcoin/lightning-rpc
       LNBITS_BACKEND_WALLET_CLASS: CLightningWallet

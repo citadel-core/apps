@@ -30,6 +30,6 @@ containers:
     port: 1323
     user: 1000:1000
     environment:
-      LNME_LND_ADDRESS: $LND_IP:$LND_GRPC_PORT
+      LNME_LND_ADDRESS: $APP_LND_SERVICE_IP:10009
       LNME_LND_CERT_PATH: /lnd/tls.cert
       LNME_LND_MACAROON_PATH: /lnd/data/chain/bitcoin/$BITCOIN_NETWORK/invoice.macaroon

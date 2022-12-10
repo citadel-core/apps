@@ -33,7 +33,7 @@ containers:
     data:
       - data:/data
     environment:
-      LND_SOCKET: "$LND_IP:$LND_GRPC_PORT"
+      LND_SOCKET: "$APP_LND_SERVICE_IP:10009"
       LND_MACAROON_PATH: "/lnd/data/chain/bitcoin/$BITCOIN_NETWORK/admin.macaroon"
       LND_TLSCERT_PATH: "/lnd/tls.cert"
       CONFIG_FILE: "/data/tallycoin_api.key"

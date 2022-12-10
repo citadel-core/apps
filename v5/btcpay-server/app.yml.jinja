@@ -57,7 +57,7 @@ services:
       BTCPAY_CHAINS: btc
       BTCPAY_BTCEXPLORERURL: http://$APP_BTCPAY_SERVER_NBXPLORER_IP:32838
       {% if services is containing("lnd") %}
-      BTCPAY_BTCLIGHTNING: type=lnd-rest;server=https://$LND_IP:$LND_REST_PORT/;macaroonfilepath=/lnd/data/chain/bitcoin/$BITCOIN_NETWORK/admin.macaroon;allowinsecure=true
+      BTCPAY_BTCLIGHTNING: type=lnd-rest;server=https://$APP_LND_SERVICE_IP:8080/;macaroonfilepath=/lnd/data/chain/bitcoin/$BITCOIN_NETWORK/admin.macaroon;allowinsecure=true
       {% elif services is containing("core-ln") %}
       BTCPAY_BTCLIGHTNING: type=clightning;server=unix://c-lightning/bitcoin/lightning-rpc
       {%endif %}

@@ -31,7 +31,7 @@ services:
       OAK_LND_MACAROON_PATH: /lnd-dir/data/chain/bitcoin/$BITCOIN_NETWORK/admin.macaroon
       OAK_DATA_DIR: /data
       OAK_LND_CERT_PATH: /lnd-dir/tls.cert
-      OAK_LND_REST_API_URL: https://$LND_IP:$LND_REST_PORT
+      OAK_LND_REST_API_URL: https://$APP_LND_SERVICE_IP:8080
       ROCKET_ADDRESS: 0.0.0.0
       ROCKET_PORT: '8100'
     port: 8100

@@ -50,7 +50,7 @@ containers:
           "db": 0
         },
         "lnd": {
-          "url": "$LND_IP:$LND_GRPC_PORT",
+          "url": "$APP_LND_SERVICE_IP:10009",
           "password": ""
         }
       }
