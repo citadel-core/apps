@@ -79,3 +79,25 @@ services:
       # TODO: Find another way of restarting, we can't give apps full root access to docker
       LND_CONTAINER_NAME: lightning
       SLEEPTIME: 3600
+
+  middleware:
+    image: ghcr.io/runcitadel/middleware:main@sha256:fdb8b40a651cb4563c754c3f29d1826d32460100c9846d185e8609f0b357eec6
+    depends_on:
+    - service
+    command: sh -c "./wait-for-manager.sh $MANAGER_IP && ./start.sh"
+    restart: on-failure
+    mounts:
+      data:
+        lnd: /lnd
+      jwt-public-key: /jwt-public-key
+    environment:
+      PORT: '3000'
+      BITCOIN_HOST: $BITCOIN_IP
+      RPC_PORT: $BITCOIN_RPC_PORT
+      RPC_USER: $BITCOIN_RPC_USER
+      RPC_PASSWORD: $BITCOIN_RPC_PASS
+      LND_NETWORK: $BITCOIN_NETWORK
+      LND_HOST: ${LND_IP}
+      JWT_PUBLIC_KEY_FILE: /jwt-public-key/jwt.pem
+      DEVICE_HOSTS: ${DEVICE_HOSTS:-"http://citadel.local"}
+      UNSAFE_REMOVE_CORS_CHECK: true
