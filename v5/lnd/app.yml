@@ -8,6 +8,7 @@ metadata:
     Lightning Labs: https://github.com/lightningnetwork/lnd
   permissions:
     - bitcoind
+    - network
   repo:
     Public: https://github.com/lightningnetwork/lnd
   support: https://t.me/runcitadel
