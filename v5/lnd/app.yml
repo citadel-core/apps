@@ -65,6 +65,11 @@ services:
         9735: 9735
         10009: 10009
         8080: 8080
+    hidden_services:
+      grpc:
+        10009: 10009
+      rest:
+        8080: 8080
 
   neutrino-switcher:
     image: lncm/neutrino-switcher:1.0.5@sha256:3ddf58c5599ba22db8414f2694bfeeba086455d4a19b4955b26c3ae5e967d42a
