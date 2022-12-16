@@ -103,7 +103,7 @@ services:
       RPC_USER: $BITCOIN_RPC_USER
       RPC_PASSWORD: $BITCOIN_RPC_PASS
       LND_NETWORK: $BITCOIN_NETWORK
-      LND_HOST: ${APP_LND_MIDDLEWARE_IP}
+      LND_HOST: ${APP_LND_SERVICE_IP}
       JWT_PUBLIC_KEY_FILE: /jwt-public-key/jwt.pem
       DEVICE_HOSTS: ${DEVICE_HOSTS:-"http://citadel.local"}
       UNSAFE_REMOVE_CORS_CHECK: true
