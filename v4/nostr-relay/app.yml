@@ -1,0 +1,28 @@
+citadel_version: 4
+metadata:
+  name: Nostr Relay
+  version: 0.7.13
+  category: Social
+  tagline: A nostr relay
+  developers:
+    Greg Heartsfield: https://wiki.wellorder.net/
+  description: Description is coming soon.
+  permissions: []
+  repo:
+    Public: https://git.sr.ht/~gheartsfield/nostr-rs-relay
+  support: https://t.me/runcitadel
+  gallery:
+  - 1.jpg
+  - 2.jpg
+  - 3.jpg
+  defaultPassword: null
+  torOnly: false
+services:
+  server:
+    image: ghcr.io/runcitadel/nostr-rs-relay:main@sha256:8bae13a89371dc62564c96db08a1a0d4dcd59b76b8787c2cab2bb7ba57594c0a
+    port: 8090
+    mounts:
+      data:
+        data: /usr/src/app/db
+    hidden_services:
+      8090: 8090
