@@ -57,6 +57,8 @@ services:
         9735: 9735
     hidden_services:
       9735: 9735
+      sparko:
+        9737: 9737
 
   middleware:
     image: ghcr.io/runcitadel/middleware:main@sha256:fdb8b40a651cb4563c754c3f29d1826d32460100c9846d185e8609f0b357eec6
@@ -66,6 +68,8 @@ services:
     restart: on-failure
     mounts:
       jwt-public-key: /jwt-public-key
+      data:
+        cln: /c-lightning
     environment:
       PORT: '3000'
       BITCOIN_HOST: $BITCOIN_IP
@@ -73,7 +77,7 @@ services:
       RPC_USER: $BITCOIN_RPC_USER
       RPC_PASSWORD: $BITCOIN_RPC_PASS
       LND_NETWORK: $BITCOIN_NETWORK
-      LND_HOST: ${LND_IP}
       JWT_PUBLIC_KEY_FILE: /jwt-public-key/jwt.pem
       DEVICE_HOSTS: ${DEVICE_HOSTS:-"http://citadel.local"}
       UNSAFE_REMOVE_CORS_CHECK: true
+      LIGHTNING_IMPL: c-lightning
