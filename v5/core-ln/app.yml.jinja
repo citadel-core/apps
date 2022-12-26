@@ -43,6 +43,7 @@ services:
     mounts:
       shared_data:
         cln: /data/.lightning
+        core-ln.conf: /data/.lightning/config
       bitcoin: /data/.bitcoin
     environment:
       {% if BITCOIN_NETWORK == "mainnet" %}
