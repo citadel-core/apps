@@ -91,7 +91,7 @@ services:
       BOLTZ_MACAROON_PATH: /boltz/.boltz-lnd/macaroons
     {% elif services is containing("core-ln") %}
       LN_IMPLEMENTATION: CLT
-      LN_SERVER_URL: https://$APP_CORE_LIGHTNING_SERVICE_IP:3001
+      LN_SERVER_URL: https://$APP_CORE_LN_SERVICE_IP:3001
       MACAROON_PATH: /core-ln/certs
       CONFIG_PATH: /core-ln/config
       ENABLE_OFFERS: "true"
