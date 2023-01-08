@@ -1,7 +1,7 @@
 citadel_version: 4
 metadata:
   name: LNDg
-  version: 1.4.0
+  version: 1.5.0
   category: Lightning Node Management
   tagline: Lite GUI web interface to analyze LND data and manage your node with automation.
   developers:
@@ -21,7 +21,7 @@ metadata:
   torOnly: false
 services:
   main:
-    image: ghcr.io/cryptosharks131/lndg:v1.4.0@sha256:9b97efa9a4329a4fdaf2025124433b40eb329526e13c73180c472de26bfd43df
+    image: ghcr.io/cryptosharks131/lndg:v1.5.0@sha256:5adb0bace9086468542fe8ecf7c971fc47c94b0da6b491b0eb856f3d854c86ba
     stop_grace_period: 1m
     restart: on-failure
     command:
@@ -30,6 +30,7 @@ services:
     - python initialize.py -net '${BITCOIN_NETWORK}' -server '${LND_IP}:${LND_GRPC_PORT}' -pw '${APP_SEED}' -d && supervisord && python manage.py runserver 0.0.0.0:3000
     port: 3000
     mounts:
-      lnd: /root/.lnd
       data:
         data: /lndg/data
+      lnd: /root/.lnd
+    direct_tcp: false
