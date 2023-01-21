@@ -1,16 +1,12 @@
-# SPDX-FileCopyrightText: 2021 Citadel and contributors
-#
-# SPDX-License-Identifier: AGPL-3.0-only
-
-# yaml-language-server: $schema=../../app-standard-v3.yml
-
-version: 3
+citadel_version: 4
 metadata:
-  category: Lightning Node Management
   name: Lightning Terminal
-  version: 0.7.0-alpha
+  version: 0.8.5-alpha
+  category: Lightning Node Management
   tagline: A browser-based interface for managing channel liquidity
-  description: >-
+  developers:
+    Lightning Labs: https://lightning.engineering
+  description: |-
     With Lightning Terminal, you can
       - Visualize your channels and balances
 
@@ -23,31 +19,33 @@ metadata:
       - Access a preview release of the Pool UI
 
       - Use Pool to earn sats by opening channels to those needing inbound liquidity
-  developers:
-    Lightning Labs: https://lightning.engineering
-  dependencies:
-    - lnd
-  repo: https://github.com/lightninglabs/lightning-terminal
+  permissions:
+  - lnd
+  repo:
+    Public: https://github.com/lightninglabs/lightning-terminal
   support: https://github.com/lightninglabs/lightning-terminal/issues
   gallery:
-    - 1.jpg
-    - 2.jpg
-    - 3.jpg
-    - 4.jpg
+  - 1.jpg
+  - 2.jpg
+  - 3.jpg
+  - 4.jpg
   defaultPassword: $APP_SEED
-containers:
-  - name: web
-    image: lightninglabs/lightning-terminal:v0.7.0-alpha@sha256:7b8ac4774d6a604c1f325975885e47d8f476c2b9235db97fb6927314ab723851
+services:
+  web:
+    image: lightninglabs/lightning-terminal:v0.8.5-alpha@sha256:e534d3a4cd48e2c1bb3cc61d87300ccd59edc4a557ad353c719e110ab0fc4f6a
     user: 1000:1000
+    command:
+    - --insecure-httplisten=0.0.0.0:$APP_LIGHTNING_TERMINAL_WEB_PORT
+    - --network="$BITCOIN_NETWORK"
+    - --lnd-mode="remote"
+    - --remote.lnd.rpcserver=$APP_LND_SERVICE_IP:10009
+    - --remote.lnd.macaroonpath="/lnd/data/chain/bitcoin/$BITCOIN_NETWORK/admin.macaroon"
+    - --remote.lnd.tlscertpath="/lnd/tls.cert"
+    - --uipassword="${APP_SEED}"
     environment:
       HOME: /data
-    command:
-      - --insecure-httplisten=0.0.0.0:$APP_LIGHTNING_TERMINAL_WEB_PORT
-      - --network="$BITCOIN_NETWORK"
-      - --lnd-mode="remote"
-      - --remote.lnd.rpcserver=$APP_LND_SERVICE_IP:10009
-      - --remote.lnd.macaroonpath="/lnd/data/chain/bitcoin/$BITCOIN_NETWORK/admin.macaroon"
-      - --remote.lnd.tlscertpath="/lnd/tls.cert"
-      - --uipassword="${APP_SEED}"
-    data:
-      - data:/data
+    port_priority: Recommended
+    mounts:
+      data:
+        data: /data
+      lnd: /lnd
