@@ -109,7 +109,7 @@ services:
       UNSAFE_REMOVE_CORS_CHECK: true
 
   backup:
-    image: runcitadel/ln-backups:main@sha256:c6decd9a7dcc7aef5f1025f9b0fde1b47f64eb3df71f1a64e1eab78ce61dc216
+    image: runcitadel/ln-backups:main@sha256:ed96071a7f52fc54f86f69dbb9e090bfce5a1b8a1fd0c69660af65737c2de855
     mounts:
       data:
         lnd: /lnd
