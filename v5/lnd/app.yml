@@ -108,7 +108,7 @@ services:
       DEVICE_HOSTS: ${DEVICE_HOSTS:-"http://citadel.local"}
       UNSAFE_REMOVE_CORS_CHECK: true
 
-   backup:
+  backup:
     image: runcitadel/ln-backups:main@sha256:939c05535448f6772bb45f503a58d136244a290caf4504c97b4e2f931c23bc25
     mounts:
       data:
