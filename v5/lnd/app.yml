@@ -107,3 +107,14 @@ services:
       JWT_PUBLIC_KEY_FILE: /jwt-public-key/jwt.pem
       DEVICE_HOSTS: ${DEVICE_HOSTS:-"http://citadel.local"}
       UNSAFE_REMOVE_CORS_CHECK: true
+
+   backup:
+    image: runcitadel/ln-backups:main@sha256:939c05535448f6772bb45f503a58d136244a290caf4504c97b4e2f931c23bc25
+    mounts:
+      data:
+        lnd: /lnd
+    environment:
+      BACKUP_ENCRYPTION_KEY: $APP_SEED_2
+      BACKUP_ID: $APP_SEED
+      TOR_PROXY_IP: $TOR_PROXY_IP
+      TOR_PROXY_PORT: $TOR_PROXY_PORT
