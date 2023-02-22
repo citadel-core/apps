@@ -1,21 +1,22 @@
-# SPDX-FileCopyrightText: 2021 Citadel and contributors
+# SPDX-FileCopyrightText: 2021-2023 Citadel and contributors
 #
 # SPDX-License-Identifier: AGPL-3.0-or-later
 
-# yaml-language-server: $schema=../../app-standard-v3.yml
-
-version: 3
+citadel_version: 4
 
 metadata:
   category: Networking
   name: Tailscale
-  version: 23.0.2
+  version: 1.36.1
   tagline: A VPN to access your Citadel from anywhere
-  description: No description yet.
-  developers: 
+  description: >-
+    Tailscale allows you to easily connect to your Citadel node (and home network) from anywhere.
+  developers:
     Tailscale Inc.: https://tailscale.com
-  dependencies: []
-  repo: https://github.com/tailscale/tailscale
+  repo:
+    Public: https://github.com/tailscale/tailscale
+  permissions:
+    - network
   support: https://github.com/tailscale/tailscale/issues
   gallery:
     - 1.jpg
@@ -23,12 +24,14 @@ metadata:
     - 3.jpg
   path: /
 
-containers:
-  - name: main
-    image: tailscale/tailscale:v1.20.4@sha256:ae08b5ab928118e85d01837e98449d69fc46dd66397ec9375f8ea5847e55d916
+services:
+  main:
+    image: tailscale/tailscale:v1.36.1@sha256:9518953f3c5c7c02394098a7870156fec7f035b8449342bb07209b10f81d2eaa
     network_mode: "host"
     restart: on-failure
     stop_grace_period: 1m
-    command: "sh -c 'tailscale web --listen 0.0.0.0:${APP_TAILSCALE_MAIN_PORT} & exec tailscaled --tun=userspace-networking'"
+    command: "sh -c 'tailscale web --listen 0.0.0.0:5000 & exec tailscaled --tun=userspace-networking'"
     data:
       - data:/var/lib
+    port: 5000
+    port_priority: Required

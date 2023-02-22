@@ -19,11 +19,11 @@ metadata:
   permissions:
   {% if services is containing("lnd") %}
     - lnd
-  {% elif services is containing("core-ln") %}
-    - core-ln
+  {% elif services is containing("c-lightning") %}
+    - c-lightning
   {% else %}
     - - lnd
-      - core-ln
+      - c-lightning
   {% endif %}
     - bitcoind
   repo:
@@ -57,16 +57,16 @@ services:
       BTCPAY_CHAINS: btc
       BTCPAY_BTCEXPLORERURL: http://$APP_BTCPAY_SERVER_NBXPLORER_IP:32838
       {% if services is containing("lnd") %}
-      BTCPAY_BTCLIGHTNING: type=lnd-rest;server=https://$APP_LND_SERVICE_IP:8080/;macaroonfilepath=/lnd/data/chain/bitcoin/$BITCOIN_NETWORK/admin.macaroon;allowinsecure=true
-      {% elif services is containing("core-ln") %}
+      BTCPAY_BTCLIGHTNING: type=lnd-rest;server=https://$LND_IP:$LND_REST_PORT/;macaroonfilepath=/lnd/data/chain/bitcoin/$BITCOIN_NETWORK/admin.macaroon;allowinsecure=true
+      {% elif services is containing("c-lightning") %}
       BTCPAY_BTCLIGHTNING: type=clightning;server=unix://c-lightning/bitcoin/lightning-rpc
       {%endif %}
       BTCPAY_SOCKSENDPOINT: $TOR_PROXY_IP:$TOR_PROXY_PORT
     mounts:
       {% if services is containing("lnd") %}
       lnd: /lnd
-      {% elif services is containing("core-ln") %}
-      core-ln: /c-lightning
+      {% elif services is containing("c-lightning") %}
+      c_lightning: /c-lightning
       {%endif %}
       data:
         data/nbxplorer: /data/.nbxplorer
@@ -75,7 +75,7 @@ services:
   nbxplorer:
     depends_on:
       - postgres
-    image: nicolasdorier/nbxplorer:2.3.42@sha256:c6b255498b1bad64cdf874459edd163c6a84f9b39118ecc4ad0816900f7647d4
+    image: nicolasdorier/nbxplorer:2.3.62@sha256:8f484e37fc2ab7f9bf7524ad7d4d5a09a39d5bc3dee5f84cfa43f93be3396e92
     user: 1000:1000
     environment:
       NBXPLORER_DATADIR: /data
