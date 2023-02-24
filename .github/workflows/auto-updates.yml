@@ -20,7 +20,7 @@ jobs:
       - name: Check for updates
         run: |
           cd ..
-          git clone https://github.com/citadel-core/app-manager -b next
+          git clone https://github.com/citadel-core/app-manager
           cd app-manager
           # TODO: Use prebuilts/Docker
           cargo run --features=cli,dev-tools -- update ../apps --token "${{ secrets.GITHUB_TOKEN }}"
