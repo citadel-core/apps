@@ -39,7 +39,7 @@ services:
       LNBITS_DATA_FOLDER: /data
       LNBITS_SITE_TITLE: LNbits
     {% if services is containing("lnd") %}
-      LNBITS_BACKEND_WALLET_CLASS: LndGrpcWallet
+      LNBITS_BACKEND_WALLET_CLASS: LndWallet
       LND_GRPC_CERT: /lnd/tls.cert
       LND_GRPC_MACAROON: /lnd/data/chain/bitcoin/$BITCOIN_NETWORK/admin.macaroon
       LND_GRPC_ENDPOINT: $LND_IP
