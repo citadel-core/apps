@@ -1,7 +1,7 @@
 citadel_version: 4
 metadata:
   name: LNbits
-  version: 0.9.5.2
+  version: 0.9.7
   category: Lightning Node Management
   tagline: Multi-user wallet management system
   developers:
@@ -27,7 +27,7 @@ metadata:
   description: Description coming soon.
 services:
   main:
-    image: lnbitsdocker/lnbits-legend:0.9.5.2@sha256:534ee470da102e37fad3dd6dd2ca8d6a5161fd4265461bea79edbbb008b1d978
+    image: lnbitsdocker/lnbits-legend:0.9.7@sha256:1fccd9611a23b9d9259ca4adff860e3e2d441ed42261d192141e76b261cd3b74
     user: 1000:1000
     restart: on-failure
     init: true
@@ -39,10 +39,11 @@ services:
       LNBITS_DATA_FOLDER: /data
       LNBITS_SITE_TITLE: LNbits
     {% if services is containing("lnd") %}
-      LNBITS_BACKEND_WALLET_CLASS: LndRestWallet
-      LND_REST_CERT: /lnd/tls.cert
-      LND_REST_MACAROON: /lnd/data/chain/bitcoin/$BITCOIN_NETWORK/admin.macaroon
-      LND_REST_ENDPOINT: https://$LND_IP:$LND_REST_PORT/
+      LNBITS_BACKEND_WALLET_CLASS: LndGrpcWallet
+      LND_GRPC_CERT: /lnd/tls.cert
+      LND_GRPC_MACAROON: /lnd/data/chain/bitcoin/$BITCOIN_NETWORK/admin.macaroon
+      LND_GRPC_ENDPOINT: $LND_IP
+      LND_GRPC_PORT: $LND_GRPC_PORT
     {% elif services is containing("c-lightning") %}
       CLIGHTNING_RPC: /c-lightning/bitcoin/lightning-rpc
       LNBITS_BACKEND_WALLET_CLASS: CLightningWallet
