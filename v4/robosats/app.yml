@@ -1,7 +1,7 @@
 citadel_version: 4
 metadata:
   name: RoboSats
-  version: v0.2.0
+  version: v0.4.0-alpha
   category: Finance
   tagline: Simple and Private Bitcoin P2P Exchange
   developers:
@@ -33,7 +33,7 @@ metadata:
     You can join other cool Robots and get community support at https://t.me/robosats telegram group.
 services:
   main:
-    image: recksato/robosats-client:7083423@sha256:289f47608f2a325cbd7560d3f43f2bcb16ff57edc492ba65867c81f54d48fb38
+    image: recksato/robosats-client:v0.4.0-alpha@sha256:9f9a759be3a4faf1305ab8ec17d0041fc430b604767b1b4838015d365080433d
     stop_grace_period: 1m
     restart: on-failure
     init: true
