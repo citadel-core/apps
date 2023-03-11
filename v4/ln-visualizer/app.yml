@@ -1,7 +1,7 @@
 citadel_version: 4
 metadata:
   name: LnVisualizer
-  version: 0.0.27
+  version: 0.0.28
   category: Explorers
   tagline: View the Lightning Network from your node's perspective
   developers:
@@ -18,25 +18,22 @@ metadata:
   - 3.jpg
   path: ''
   defaultPassword: null
-  torOnly: false
 services:
   main:
-    image: maxkotlan/ln-visualizer-web:v0.0.27@sha256:b9bac717ba4e8f7aa4c4ac3a25fb1d0d261e7db67f46b0b28c8d17e6b44ea079
+    image: maxkotlan/ln-visualizer-web:v0.0.28@sha256:d207e2e474453090d8c0ebec568c94536f79c9ae0d691818068861bbc2abb25d
     stop_grace_period: 1m
     restart: on-failure
     environment:
       LN_VISUALIZER_API_URL: http://${APP_LN_VISUALIZER_API_IP}:5647
     port: 80
-    direct_tcp: false
   api:
     image: maxkotlan/ln-visualizer-api:v0.0.20@sha256:cfea255f3343dbacf96c5470dcd442f1cc034337dfb46ecfbbc6d5c1978da1a4
     user: 1000:1000
     stop_grace_period: 1m
     restart: on-failure
     environment:
+      LND_CERT_FILE: /lnd/tls.cert
       LND_MACAROON_FILE: /lnd/data/chain/bitcoin/${BITCOIN_NETWORK}/readonly.macaroon
       LND_SOCKET: ${LND_IP}:${LND_GRPC_PORT}
-      LND_CERT_FILE: /lnd/tls.cert
     mounts:
       lnd: /lnd
-    direct_tcp: false
