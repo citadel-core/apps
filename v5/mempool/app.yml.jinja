@@ -9,7 +9,7 @@ citadel_version: 4
 metadata:
   category: Explorers
   name: Mempool
-  version: 2.4.0
+  version: v2.5.0-dev9
   tagline: A mempool visualizer, explorer and fee estimator
   description: >-
     Mempool is the official self-hosted version of the fully featured explorer,
@@ -61,7 +61,7 @@ metadata:
 
 services:
   main:
-    image: mempool/frontend:v2.5.0-dev1@sha256:065f72100a963d7fad6a02faf29edd3aa643f949a550dc813ae5d35be2315c4c
+    image: mempool/frontend:v2.5.0-dev9@sha256:a39957bf0ff2ae772804049ff3542ff8e62e6999ca3e149da5116f0ba682462d
     user: 1000:1000
     port: 3000
     init: true
@@ -70,7 +70,7 @@ services:
       FRONTEND_HTTP_PORT: "3000"
       BACKEND_MAINNET_HTTP_HOST: $APP_MEMPOOL_API_IP
   api:
-    image: mempool/backend:v2.5.0-dev1@sha256:e0e206dcc81ad492344e28f9bc19d3d749bc93e8edbbd197511a8ebbd91b7565
+    image: mempool/backend:v2.5.0-dev9@sha256:188cb6ee52b96d81416278a4c2e88388abd497d1b1666ba201fd55ae63fdfdb4
     user: 1000:1000
     init: true
     command: ./wait-for-it.sh mariadb:3306 --timeout=720 --strict -- ./start.sh
