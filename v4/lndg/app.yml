@@ -1,7 +1,7 @@
 citadel_version: 4
 metadata:
   name: LNDg
-  version: 1.6.1
+  version: 1.6.2
   category: Lightning Node Management
   tagline: Lite GUI web interface to analyze LND data and manage your node with automation.
   developers:
@@ -20,7 +20,7 @@ metadata:
   defaultPassword: $APP_SEED
 services:
   main:
-    image: ghcr.io/cryptosharks131/lndg:v1.6.1@sha256:837ca98d5f7cfb960edb4037b9798311b49edd2d1945571dbbb7cb6c46ae5d76
+    image: ghcr.io/cryptosharks131/lndg:v1.6.2@sha256:16d816829b5b713f1dfd7cd03335eca07d04dd2ab0fa81720aaeb5c9ffa776bb
     stop_grace_period: 1m
     restart: on-failure
     command:
