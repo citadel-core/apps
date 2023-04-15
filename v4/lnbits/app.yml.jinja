@@ -38,6 +38,7 @@ services:
       LNBITS_ADMIN_EXTENSIONS: ngrok,admin
       LNBITS_DATA_FOLDER: /data
       LNBITS_SITE_TITLE: LNbits
+      LNBITS_ADMIN_UI: "true"
     {% if services is containing("lnd") %}
       LNBITS_BACKEND_WALLET_CLASS: LndWallet
       LND_GRPC_CERT: /lnd/tls.cert
