@@ -1,4 +1,5 @@
-version: 3
+citadel_version: 4
+
 metadata:
   category: Lightning Node Management
   name: ThunderHub
@@ -10,25 +11,29 @@ metadata:
     Managing and monitoring your node has never been easier with transaction reports, graphs and a huge assortment of different features all bundled inside of this great tool.
   developers:
     Anthony Potdevin: https://apotdevin.com
-  dependencies:
+  permissions:
   - lnd
-  repo: https://github.com/apotdevin/thunderhub
+  repo:
+    Public: https://github.com/apotdevin/thunderhub
   support: https://t.me/thunderhub
   gallery:
   - 1.jpg
   - 2.jpg
   - 3.jpg
   defaultPassword: $APP_SEED
-containers:
-- name: web
-  image: apotdevin/thunderhub:v0.13.18@sha256:cb41292102ed8fceea59cd6375e28317e1a61f7fc2523285fbb01a696e3a0a16
-  data:
-  - data:/data
-  environment:
-    TOR_PROXY_SERVER: socks://$TOR_PROXY_IP:$TOR_PROXY_PORT
-    YML_ENV_1: $APP_LND_SERVICE_IP:10009
-    ACCOUNT_CONFIG_PATH: /data/thubConfig.yaml
-    LOG_LEVEL: debug
-    MASTER_PASSWORD_OVERRIDE: $APP_SEED
-    NO_VERSION_CHECK: 'true'
-  port: 3000
+
+services:
+  main:
+    image: apotdevin/thunderhub:v0.13.18@sha256:cb41292102ed8fceea59cd6375e28317e1a61f7fc2523285fbb01a696e3a0a16
+    mounts:
+      lnd: /lnd
+      data:
+        data: /data
+    environment:
+      TOR_PROXY_SERVER: socks://$TOR_PROXY_IP:$TOR_PROXY_PORT
+      YML_ENV_1: $APP_LND_SERVICE_IP:10009
+      ACCOUNT_CONFIG_PATH: /data/thubConfig.yaml
+      LOG_LEVEL: debug
+      MASTER_PASSWORD_OVERRIDE: $APP_SEED
+      NO_VERSION_CHECK: 'true'
+    port: 3000
