@@ -1,7 +1,7 @@
 citadel_version: 4
 metadata:
   name: LND
-  version: 0.16.0-beta
+  version: 0.16.1-beta
   category: Run a Lightning node
   tagline: An open-source Lightning backend
   developers:
@@ -48,7 +48,7 @@ services:
         tor: /var/lib/tor/
 
   service:
-    image: lightninglabs/lnd:v0.16.0-beta@sha256:1b21a570f4298ea77dce64acbcfdcddd3b1b122be5f6136e453b8997dd3c5824
+    image: lightninglabs/lnd:v0.16.1-beta@sha256:d2044a48fbe35b2941a5fc19328b1314bbe2cf68b628754ada9990b7e6dc1e3b
     user: 1000:1000
     mounts:
       data:
