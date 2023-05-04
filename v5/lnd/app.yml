@@ -48,7 +48,7 @@ services:
         tor: /var/lib/tor/
 
   service:
-    image: lightninglabs/lnd:v0.16.1-beta@sha256:d2044a48fbe35b2941a5fc19328b1314bbe2cf68b628754ada9990b7e6dc1e3b
+    image: lightninglabs/lnd:v0.16.2-beta@sha256:795d29d94f845bd070832b097ff75cf0f46cf6daf5e55bf62dc1e4e406e0027d
     user: 1000:1000
     mounts:
       data:
@@ -109,7 +109,7 @@ services:
       UNSAFE_REMOVE_CORS_CHECK: true
 
   backup:
-    image: runcitadel/ln-backups:main@sha256:bda1b8f6c802c8202274970d594e5d21421a4c7932e2a05cb8b37364e3af5eb3
+    image: runcitadel/ln-backups:main@sha256:83f8ec4b9fca205615adc875cafb5986df0307732515866bcbac3539282979cd
     mounts:
       data:
         lnd: /lnd
