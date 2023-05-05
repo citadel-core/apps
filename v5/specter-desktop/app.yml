@@ -1,4 +1,5 @@
-version: 3
+citadel_version: 4
+
 metadata:
   category: Wallets
   name: Specter Desktop
@@ -19,30 +20,32 @@ metadata:
     Specter Desktop also supports using the Bitcoin Core on your Citadel as a hot wallet, by importing or generating a random BIP39 mnemonic, but this feature is experimental and we do not recommend using it at this stage. We plan to add support for other hardware wallets as they come up.
   developers:
     Crypto Advance: https://specter.solutions
-  dependencies:
+  permissions:
   - bitcoind
-  repo: https://github.com/cryptoadvance/specter-desktop
+  repo:
+    Public: https://github.com/cryptoadvance/specter-desktop
   support: https://t.me/spectersupport
   gallery:
   - 1.jpg
   - 2.jpg
   - 3.jpg
-containers:
-- name: web
-  image: lncm/specter-desktop:v2.0.1@sha256:824999af780b354bb4e2e649c08d95c03aaf2dd2918a6172f0ed2d6688bfd7b1
-  command:
-  - --host=0.0.0.0
-  - --specter-data-folder=/data
-  data:
-  - data:/data
-  environment:
-    BTC_RPC_HOST: $BITCOIN_IP
-    BTC_RPC_PROTOCOL: http
-    BTC_RPC_PORT: $BITCOIN_RPC_PORT
-    BTC_RPC_USER: $BITCOIN_RPC_USER
-    BTC_RPC_PASSWORD: $BITCOIN_RPC_PASS
-  mounts:
-    bitcoin: /data/.bitcoin
-  port: 25441
-  preferredOutsidePort: 25441
-  stop_signal: SIGINT
+
+services:
+  main:
+    image: lncm/specter-desktop:v2.0.1@sha256:824999af780b354bb4e2e649c08d95c03aaf2dd2918a6172f0ed2d6688bfd7b1
+    command:
+    - --host=0.0.0.0
+    - --specter-data-folder=/data
+    data:
+    - data:/data
+    environment:
+      BTC_RPC_HOST: $BITCOIN_IP
+      BTC_RPC_PROTOCOL: http
+      BTC_RPC_PORT: $BITCOIN_RPC_PORT
+      BTC_RPC_USER: $BITCOIN_RPC_USER
+      BTC_RPC_PASSWORD: $BITCOIN_RPC_PASS
+    mounts:
+      bitcoin: /data/.bitcoin
+    port: 25441
+    preferredOutsidePort: 25441
+    stop_signal: SIGINT
