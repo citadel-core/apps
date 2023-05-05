@@ -1,7 +1,7 @@
 citadel_version: 4
 metadata:
   name: LND
-  version: 0.16.1-beta
+  version: 0.16.2-beta
   category: Run a Lightning node
   tagline: An open-source Lightning backend
   developers:
