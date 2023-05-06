@@ -28,7 +28,7 @@ metadata:
 services:
   main:
     image: lnbitsdocker/lnbits-legend:0.10.5@sha256:602dd4a490605ffeb33a1223cb824b605c062112867085c0146b9847d935b662
-    working_dir: /data
+    working_dir: /app
     user: 1000:1000
     restart: on-failure
     init: true
@@ -60,5 +60,4 @@ services:
         data: /data
         upgrades: /app/lnbits/upgrades
         extensions: /app/lnbits/extensions
-        # TODO: Check this
         super_user: /app/.super_user
