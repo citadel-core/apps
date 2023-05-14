@@ -5,4 +5,12 @@
 SocksPort   {{APP_LND_TOR_IP}}:9050
 ControlPort {{APP_LND_TOR_IP}}:29051
 
+# LND REST Hidden Service
+HiddenServiceDir /var/lib/tor/lnd-rest
+HiddenServicePort 8080 {{APP_LND_SERVICE_IP}}:8080
+
+# LND gRPC Hidden Service
+HiddenServiceDir /var/lib/tor/lnd-grpc
+HiddenServicePort 10009 {{APP_LND_SERVICE_IP}}:10009
+
 HashedControlPassword {{ tor_password | tor_hash }}
