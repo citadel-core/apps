@@ -87,7 +87,7 @@ services:
       SLEEPTIME: 3600
 
   middleware:
-    image: ghcr.io/runcitadel/middleware:main@sha256:fdb8b40a651cb4563c754c3f29d1826d32460100c9846d185e8609f0b357eec6
+    image: ghcr.io/runcitadel/middleware:main@sha256:5e8f385e4eb23ebcaa8293e2a0269071e06f7c8ea3bbd811c65518b3bd7cf044
     depends_on:
     - service
     command: sh -c "./wait-for-manager.sh $MANAGER_IP && ./start.sh"
