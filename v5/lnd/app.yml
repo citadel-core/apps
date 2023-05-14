@@ -54,6 +54,7 @@ services:
       data:
         walletpassword: /walletpassword
         lnd.conf: /data/.lnd/lnd.conf
+        tor: /tor/
       shared_data:
         lnd: /data/.lnd
     environment:
