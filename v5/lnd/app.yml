@@ -54,7 +54,6 @@ services:
       data:
         walletpassword: /walletpassword
         lnd.conf: /data/.lnd/lnd.conf
-        tor: /tor/
       shared_data:
         lnd: /data/.lnd
     environment:
@@ -96,6 +95,7 @@ services:
     mounts:
       data:
         lnd: /lnd
+        tor: /tor
       jwt-public-key: /jwt-public-key
     environment:
       PORT: '3000'
