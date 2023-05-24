@@ -1,7 +1,7 @@
 citadel_version: 4
 metadata:
   name: WoofBot
-  version: 0.9.0
+  version: 0.9.3
   category: Explorers
   tagline: A chatbot for your personal node.
   developers:
@@ -19,22 +19,6 @@ metadata:
   path: ''
   defaultPassword: $APP_SEED
 services:
-  main:
-    image: woofbot/woofbot:v0.9.0@sha256:3fd120e75bcf499c5abb7f0a418e08dd2be8860f3c8a8811a598490b8229db54
-    stop_grace_period: 1m
-    depends_on:
-    - mongodb
-    restart: on-failure
-    environment:
-      APP_BITCOIN_RPC_USER: $BITCOIN_RPC_USER
-      APP_BITCOIN_NODE_IP: $BITCOIN_IP
-      APP_BITCOIN_RPC_PASS: $BITCOIN_RPC_PASS
-      APP_BITCOIN_RPC_PORT: $BITCOIN_RPC_PORT
-      APP_PORT: '8080'
-      APP_PASSWORD: $APP_SEED
-      MONGODB_URI: mongodb://${APP_WOOFBOT_MONGODB_IP}:27017/woofbot
-      APP_SEED: $APP_SEED_2
-    port: 8080
   mongodb:
     image: mongo:5.0.9@sha256:37e84d3dd30cdfb5472ec42b8a6b4dc6ca7cacd91ebcfa0410a54528bbc5fa6d
     user: 1000:1000
@@ -43,3 +27,19 @@ services:
     mounts:
       data:
         data/db: /data/db
+  main:
+    image: woofbot/woofbot:v0.9.3@sha256:a56278e2c49c52da4ba218b67230c38ed73870875e74e71228a2181aa564076f
+    stop_grace_period: 1m
+    depends_on:
+    - mongodb
+    restart: on-failure
+    environment:
+      APP_BITCOIN_NODE_IP: $BITCOIN_IP
+      APP_PORT: '8080'
+      APP_PASSWORD: $APP_SEED
+      APP_BITCOIN_RPC_USER: $BITCOIN_RPC_USER
+      APP_BITCOIN_RPC_PASS: $BITCOIN_RPC_PASS
+      APP_SEED: $APP_SEED_2
+      APP_BITCOIN_RPC_PORT: $BITCOIN_RPC_PORT
+      MONGODB_URI: mongodb://${APP_WOOFBOT_MONGODB_IP}:27017/woofbot
+    port: 8080
