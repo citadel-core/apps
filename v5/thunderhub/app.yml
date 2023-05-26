@@ -1,16 +1,15 @@
 citadel_version: 4
-
 metadata:
-  category: Lightning Node Management
   name: ThunderHub
-  version: 0.13.18
+  version: 0.13.19
+  category: Lightning Node Management
   tagline: Take full control of your Lightning node
+  developers:
+    Anthony Potdevin: https://apotdevin.com
   description: |-
     ThunderHub allows you to take full control of your Lightning node with a slick and awesome UI. Explore all the options that ThunderHub has to offer, from sending and receiving Lightning payments, to checking your node's health statistics, and even more advanced options like channel rebalancing and multi-path lightning payments.
 
     Managing and monitoring your node has never been easier with transaction reports, graphs and a huge assortment of different features all bundled inside of this great tool.
-  developers:
-    Anthony Potdevin: https://apotdevin.com
   permissions:
   - lnd
   repo:
@@ -21,19 +20,18 @@ metadata:
   - 2.jpg
   - 3.jpg
   defaultPassword: $APP_SEED
-
 services:
   main:
-    image: apotdevin/thunderhub:v0.13.18@sha256:cb41292102ed8fceea59cd6375e28317e1a61f7fc2523285fbb01a696e3a0a16
-    mounts:
-      lnd: /lnd
-      data:
-        data: /data
+    image: apotdevin/thunderhub:v0.13.19@sha256:abd116d965912e4aa97a75eb24ecd7506e31dd6ef5d3685229ddb240fa54283e
     environment:
-      TOR_PROXY_SERVER: socks://$TOR_PROXY_IP:$TOR_PROXY_PORT
-      YML_ENV_1: $APP_LND_SERVICE_IP:10009
-      ACCOUNT_CONFIG_PATH: /data/thubConfig.yaml
-      LOG_LEVEL: debug
       MASTER_PASSWORD_OVERRIDE: $APP_SEED
       NO_VERSION_CHECK: 'true'
+      TOR_PROXY_SERVER: socks://$TOR_PROXY_IP:$TOR_PROXY_PORT
+      ACCOUNT_CONFIG_PATH: /data/thubConfig.yaml
+      LOG_LEVEL: debug
+      YML_ENV_1: $APP_LND_SERVICE_IP:10009
     port: 3000
+    mounts:
+      data:
+        data: /data
+      lnd: /lnd
