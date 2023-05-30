@@ -9,7 +9,7 @@ citadel_version: 4
 metadata:
   category: Lightning Node Management
   name: Ride The Lightning
-  version: 0.13.6
+  version: 0.14.0
   tagline: Manage lightning node operations better
   description: >-
     Ride the Lightning makes it easier to manage your Lightning node.
@@ -73,7 +73,7 @@ services:
       - lnd
     {% endif %}
   main:
-    image: shahanafarooqui/rtl:0.13.6@sha256:efb7d82349f73b81bf36dfcb9d6d66e7060e335666b18cce4af882675d3d97d0
+    image: shahanafarooqui/rtl:0.14.0@sha256:b515990316440518197fd40ff69ce126300e5ed9367916dc13870521d02ff8f4
     user: 1000:1000
     port: 3000
     environment:
