@@ -1,7 +1,7 @@
 citadel_version: 4
 metadata:
   name: Element
-  version: 1.11.31
+  version: 1.11.32
   category: Social
   tagline: A glossy Matrix client compatible with Synapse
   developers:
@@ -18,5 +18,5 @@ metadata:
   defaultPassword: null
 services:
   main:
-    image: vectorim/element-web:v1.11.31@sha256:564c6c85a5dced20b621ff62f42ae2c7a5529dbc70c194fb048efadc799e53da
+    image: vectorim/element-web:v1.11.32@sha256:b0e1ee9f8df8ce6853f6c4e223414cb1060223384f271167088d47231ed4b751
     port: 80
