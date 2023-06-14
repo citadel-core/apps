@@ -2,7 +2,7 @@ version: 3
 metadata:
   category: Social
   name: Sphinx Relay
-  version: 2.3.2
+  version: 2.3.3
   tagline: Chat and pay over the Lightning Network
   description: |-
     Sphinx Relay turns your Lightning node into a personal communication server. Messages are end-to-end encrypted and transmitted over the Bitcoin Lightning Network. Download Sphinx on your phone from https://sphinx.chat and pair it with Sphinx Relay on Citadel.
@@ -23,16 +23,16 @@ metadata:
   path: /connect
 containers:
 - name: web
-  image: sphinxlightning/sphinx-relay:v2.3.2@sha256:8713f9f5febb606fe39fb8c88d9877ac48bf01865e5a395ea51e26a34c077c3f
+  image: sphinxlightning/sphinx-relay:v2.3.3@sha256:d9d5d76615a8184c3d51a47b83a40a67978f210867170f52b1987356d887446f
   data:
   - data:/relay/.lnd/
   environment:
-    LND_LOG_LOCATION: /lnd/logs/bitcoin/${BITCOIN_NETWORK}/lnd.log
-    PUBLIC_URL: $APP_HIDDEN_SERVICE:80
     MACAROON_LOCATION: /lnd/data/chain/bitcoin/${BITCOIN_NETWORK}/admin.macaroon
     TLS_LOCATION: /lnd/tls.cert
+    PUBLIC_URL: $APP_HIDDEN_SERVICE:80
+    LND_PORT: 10009
+    LND_LOG_LOCATION: /lnd/logs/bitcoin/${BITCOIN_NETWORK}/lnd.log
     LND_IP: $APP_LND_SERVICE_IP
     CONNECT_UI: 'true'
-    LND_PORT: 10009
   init: true
   port: 3300
