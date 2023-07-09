@@ -1,7 +1,7 @@
 citadel_version: 4
 metadata:
   name: Vaultwarden
-  version: 1.28.1
+  version: 1.29.0
   category: Password Managers
   tagline: Unofficial Bitwarden® compatible server
   developers:
@@ -29,7 +29,7 @@ metadata:
   torOnly: true
 services:
   main:
-    image: vaultwarden/server:1.28.1@sha256:c56cba7d646584e73a17604f4d4e5aba95ee4198bbed6c919c9514d2ada97d04
+    image: vaultwarden/server:1.29.0@sha256:71c7565a54b2462a74677c8ec5dc01d92febb1a816e02b607a0c797c6953053a
     user: 1000:1000
     environment:
       ROCKET_PORT: '3000'
