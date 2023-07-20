@@ -2,7 +2,7 @@ version: 3
 metadata:
   category: Files
   name: Nextcloud
-  version: 27.0.0
+  version: 27.0.1
   tagline: Your personal cloud
   description: No description yet.
   developers:
@@ -24,9 +24,9 @@ containers:
   - data/db:/var/lib/mysql
   environment:
     MARIADB_DATABASE: nextcloud
-    MARIADB_ROOT_PASSWORD: password123
     MARIADB_USER: nextcloud
     MARIADB_PASSWORD: password123
+    MARIADB_ROOT_PASSWORD: password123
   user: 1000:1000
 - name: redis
   image: redis:6.2.6-bullseye@sha256:0c0484b1d1ff36faace984fe9d8e0fe58892ecc34a4859b97171045b9cd343e1
@@ -34,7 +34,7 @@ containers:
   - data/redis:/data
   user: 1000:1000
 - name: web
-  image: nextcloud:27.0.0@sha256:d641dd36edffdfac8ac1e51a225e941680d82b4b9e482f1a987d865fc1318bf6
+  image: nextcloud:27.0.1@sha256:53708ab2eab82fd0c2facf51a6bf1b5135bb6e1e6fe35c56dfe5a3954e356e05
   data:
   - data/nextcloud:/var/www/html
   depends_on:
@@ -43,12 +43,12 @@ containers:
   environment:
     MYSQL_PASSWORD: password123
     MYSQL_USER: nextcloud
-    MYSQL_HOST: ${APP_NEXTCLOUD_DB_IP}
-    NEXTCLOUD_ADMIN_PASSWORD: $APP_SEED
     NEXTCLOUD_ADMIN_USER: citadel
+    NEXTCLOUD_ADMIN_PASSWORD: $APP_SEED
     REDIS_HOST: ${APP_NEXTCLOUD_REDIS_IP}
     MYSQL_DATABASE: nextcloud
     NEXTCLOUD_TRUSTED_DOMAINS: ${APP_DOMAIN}:${APP_NEXTCLOUD_WEB_PORT} ${APP_HIDDEN_SERVICE}
+    MYSQL_HOST: ${APP_NEXTCLOUD_DB_IP}
   port: 80
 - name: cron
   image: nextcloud:24.0.4@sha256:69a52f571dc72f9ebbe222fc810f09d016173ec94f4423ea5e3d628496c1a5d5
