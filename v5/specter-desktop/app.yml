@@ -36,8 +36,6 @@ services:
     command:
     - --host=0.0.0.0
     - --specter-data-folder=/data
-    data:
-    - data:/data
     environment:
       BTC_RPC_HOST: $BITCOIN_IP
       BTC_RPC_PROTOCOL: http
@@ -46,6 +44,7 @@ services:
       BTC_RPC_PASSWORD: $BITCOIN_RPC_PASS
     mounts:
       bitcoin: /data/.bitcoin
+      data: /data
     port: 25441
     preferredOutsidePort: 25441
     stop_signal: SIGINT
