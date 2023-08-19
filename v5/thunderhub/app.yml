@@ -1,7 +1,7 @@
 citadel_version: 4
 metadata:
   name: ThunderHub
-  version: 0.13.20
+  version: 0.13.21
   category: Lightning Node Management
   tagline: Take full control of your Lightning node
   developers:
@@ -22,7 +22,7 @@ metadata:
   defaultPassword: $APP_SEED
 services:
   main:
-    image: apotdevin/thunderhub:v0.13.20@sha256:d87661a64a10d15da85a2bf43cf9d074111ca3daf135c4166e6b602dabf196c6
+    image: apotdevin/thunderhub:v0.13.21@sha256:f7b42bd7e48bdb43d3f995957f109463fb306515b2a61a05af9300d69bd3ae92
     environment:
       YML_ENV_1: $APP_LND_SERVICE_IP:10009
       NO_VERSION_CHECK: 'true'
