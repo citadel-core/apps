@@ -1,10 +1,11 @@
 citadel_version: 4
-
 metadata:
-  category: Wallets
   name: Specter Desktop
-  version: 2.0.1
+  version: 2.0.2
+  category: Wallets
   tagline: Multisig with hardware wallets made easy
+  developers:
+    Crypto Advance: https://specter.solutions
   description: |-
     Specter Desktop connects to the Bitcoin Core running on your Citadel and functions as a watch-only coordinator for multi-signature and single-key Bitcoin wallets. At the moment Specter Desktop is working with all major hardware wallets including:
 
@@ -18,8 +19,6 @@ metadata:
     - Cobo (airgapped, using QR codes)
 
     Specter Desktop also supports using the Bitcoin Core on your Citadel as a hot wallet, by importing or generating a random BIP39 mnemonic, but this feature is experimental and we do not recommend using it at this stage. We plan to add support for other hardware wallets as they come up.
-  developers:
-    Crypto Advance: https://specter.solutions
   permissions:
   - bitcoind
   repo:
@@ -29,22 +28,21 @@ metadata:
   - 1.jpg
   - 2.jpg
   - 3.jpg
-
+  defaultPassword: null
 services:
   main:
-    image: lncm/specter-desktop:v2.0.1@sha256:824999af780b354bb4e2e649c08d95c03aaf2dd2918a6172f0ed2d6688bfd7b1
+    image: lncm/specter-desktop:v2.0.2@sha256:aeda6dfaa3f82c7bd3e1c6ba61388df02bd0c22a59412d2bbed3c792fb0b3702
+    stop_signal: SIGINT
     command:
     - --host=0.0.0.0
     - --specter-data-folder=/data
     environment:
-      BTC_RPC_HOST: $BITCOIN_IP
-      BTC_RPC_PROTOCOL: http
       BTC_RPC_PORT: $BITCOIN_RPC_PORT
       BTC_RPC_USER: $BITCOIN_RPC_USER
       BTC_RPC_PASSWORD: $BITCOIN_RPC_PASS
+      BTC_RPC_PROTOCOL: http
+      BTC_RPC_HOST: $BITCOIN_IP
+    port: 25441
     mounts:
       bitcoin: /data/.bitcoin
       data: /data
-    port: 25441
-    preferredOutsidePort: 25441
-    stop_signal: SIGINT
