@@ -22,7 +22,7 @@ metadata:
   description: Jam is a user-interface for JoinMarket with focus on user-friendliness. It's time for top-notch privacy for your bitcoin. Widespread use of JoinMarket improves bitcoin's fungibility and privacy for all. The app provides sensible defaults and is easy to use for beginners while still providing the features advanced users expect.
 services:
   main:
-    image: ghcr.io/joinmarket-webui/jam-standalone:v0.1.5-clientserver-v0.9.9@sha256:c8bf944000eb8b3b5666ac037440a4904f9c3baa8665c52081a9e5092d6bd275
+    image: ghcr.io/joinmarket-webui/jam-standalone:v0.1.6-clientserver-v0.9.10@sha256:92f80ceab43eea86fda4b16a90f478069e0cdd85b04bc97e25786764f4b8c4d1
     stop_grace_period: 1m
     restart: on-failure
     init: true
