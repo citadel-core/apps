@@ -2,7 +2,7 @@ version: 3
 metadata:
   category: Lightning Node Management
   name: ThunderHub
-  version: 0.13.23
+  version: 0.13.27
   tagline: Take full control of your Lightning node
   description: |-
     ThunderHub allows you to take full control of your Lightning node with a slick and awesome UI. Explore all the options that ThunderHub has to offer, from sending and receiving Lightning payments, to checking your node's health statistics, and even more advanced options like channel rebalancing and multi-path lightning payments.
@@ -21,14 +21,14 @@ metadata:
   defaultPassword: $APP_SEED
 containers:
 - name: web
-  image: apotdevin/thunderhub:v0.13.23@sha256:e285abb2f997a75e69968b2e4279350b3ef0a495dc6e93fe37f12fb73c9f43b2
+  image: apotdevin/thunderhub:v0.13.27@sha256:340e0f9d9af220f019ec98d398d33b43ba3acec2051838c3a049e54b37c8351c
   data:
   - data:/data
   environment:
-    TOR_PROXY_SERVER: socks://$TOR_PROXY_IP:$TOR_PROXY_PORT
     ACCOUNT_CONFIG_PATH: /data/thubConfig.yaml
-    YML_ENV_1: $LND_IP:$LND_GRPC_PORT
-    LOG_LEVEL: debug
     MASTER_PASSWORD_OVERRIDE: $APP_SEED
+    LOG_LEVEL: debug
+    TOR_PROXY_SERVER: socks://$TOR_PROXY_IP:$TOR_PROXY_PORT
+    YML_ENV_1: $LND_IP:$LND_GRPC_PORT
     NO_VERSION_CHECK: 'true'
   port: 3000
