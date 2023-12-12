@@ -1,7 +1,7 @@
 citadel_version: 4
 metadata:
   name: ThunderHub
-  version: 0.13.27
+  version: 0.13.28
   category: Lightning Node Management
   tagline: Take full control of your Lightning node
   developers:
@@ -22,14 +22,14 @@ metadata:
   defaultPassword: $APP_SEED
 services:
   main:
-    image: apotdevin/thunderhub:v0.13.27@sha256:340e0f9d9af220f019ec98d398d33b43ba3acec2051838c3a049e54b37c8351c
+    image: apotdevin/thunderhub:v0.13.28@sha256:ebb0e4aaed50454d928da52fbcbd281059d8607a1a72b4b4a273353bf9a91a67
     environment:
-      YML_ENV_1: $APP_LND_SERVICE_IP:10009
-      NO_VERSION_CHECK: 'true'
-      ACCOUNT_CONFIG_PATH: /data/thubConfig.yaml
-      MASTER_PASSWORD_OVERRIDE: $APP_SEED
       TOR_PROXY_SERVER: socks://$TOR_PROXY_IP:$TOR_PROXY_PORT
       LOG_LEVEL: debug
+      ACCOUNT_CONFIG_PATH: /data/thubConfig.yaml
+      YML_ENV_1: $APP_LND_SERVICE_IP:10009
+      NO_VERSION_CHECK: 'true'
+      MASTER_PASSWORD_OVERRIDE: $APP_SEED
     port: 3000
     mounts:
       data:
