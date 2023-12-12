@@ -1,7 +1,7 @@
 citadel_version: 4
 metadata:
   name: Gitea
-  version: 1.21.1
+  version: 1.21.2
   category: Development
   tagline: A painless self-hosted Git service
   developers:
@@ -32,28 +32,28 @@ services:
     user: 1000:1000
     environment:
       MYSQL_PASSWORD: moneyprintergobrrr
-      MYSQL_ROOT_PASSWORD: gitea
       MYSQL_DATABASE: gitea
       MYSQL_USER: gitea
+      MYSQL_ROOT_PASSWORD: gitea
     mounts:
       data:
         data/db: /var/lib/mysql
   main:
-    image: gitea/gitea:1.21.1@sha256:cc5f87a719754b472e5e363ab74a37b77d78a73547cccdc1c9d4a9fce810d888
+    image: gitea/gitea:1.21.2@sha256:aec14185c3e5bb4e0e3436f1b1a1a800eb3393587137daf6e39d0891bc64fa2e
     user: 1000:1000
     environment:
-      GITEA__server__SSH_LISTEN_PORT: 2222
-      GITEA__database__HOST: ${APP_GITEA_DB_IP}:3306
-      GITEA__server__HTTP_PORT: ${APP_GITEA_MAIN_PORT}
-      GITEA__database__PASSWD: moneyprintergobrrr
-      GITEA__database__NAME: gitea
       GITEA__server__DOMAIN: ${APP_DOMAIN}
-      GITEA__security__INSTALL_LOCK: 'true'
-      GITEA__server__SSH_DOMAIN: ${APP_DOMAIN}
+      GITEA__database__HOST: ${APP_GITEA_DB_IP}:3306
       GITEA__server__START_SSH_SERVER: 'true'
-      GITEA__database__DB_TYPE: mysql
-      GITEA__database__USER: gitea
       GITEA__server__SSH_PORT: 2222
+      GITEA__database__USER: gitea
+      GITEA__server__HTTP_PORT: ${APP_GITEA_MAIN_PORT}
+      GITEA__database__NAME: gitea
+      GITEA__security__INSTALL_LOCK: 'true'
+      GITEA__database__PASSWD: moneyprintergobrrr
+      GITEA__server__SSH_DOMAIN: ${APP_DOMAIN}
+      GITEA__server__SSH_LISTEN_PORT: 2222
+      GITEA__database__DB_TYPE: mysql
     required_ports:
       tcp:
         2222: 2222
