@@ -1,7 +1,7 @@
 citadel_version: 4
 metadata:
   name: Gitea
-  version: 1.21.3
+  version: 1.21.4
   category: Development
   tagline: A painless self-hosted Git service
   developers:
@@ -27,6 +27,31 @@ metadata:
   - 3.jpg
   defaultPassword: null
 services:
+  main:
+    image: gitea/gitea:1.21.4@sha256:63220de04217fdda2b2025b9b5000dec5995c77a32cbde0fe4962d6f2bad921a
+    user: 1000:1000
+    environment:
+      GITEA__security__INSTALL_LOCK: 'true'
+      GITEA__server__SSH_PORT: 2222
+      GITEA__database__HOST: ${APP_GITEA_DB_IP}:3306
+      GITEA__database__DB_TYPE: mysql
+      GITEA__database__USER: gitea
+      GITEA__server__SSH_LISTEN_PORT: 2222
+      GITEA__database__NAME: gitea
+      GITEA__server__SSH_DOMAIN: ${APP_DOMAIN}
+      GITEA__server__HTTP_PORT: ${APP_GITEA_MAIN_PORT}
+      GITEA__server__START_SSH_SERVER: 'true'
+      GITEA__server__DOMAIN: ${APP_DOMAIN}
+      GITEA__database__PASSWD: moneyprintergobrrr
+    required_ports:
+      tcp:
+        2222: 2222
+      http: null
+      udp: null
+    mounts:
+      data:
+        data/gitea/config: /etc/gitea
+        data/gitea/data: /var/lib/gitea
   db:
     image: mariadb:10.6.4@sha256:4bbee12b1adf299211f844ebbe89563675c46965470dcfa40f5278d63c56d030
     user: 1000:1000
@@ -38,28 +63,3 @@ services:
     mounts:
       data:
         data/db: /var/lib/mysql
-  main:
-    image: gitea/gitea:1.21.3@sha256:a5bb316b224a9887756f5762488a6efe4065cf9cdbdf2c6d059f6cb1b6a0ce8a
-    user: 1000:1000
-    environment:
-      GITEA__database__USER: gitea
-      GITEA__server__HTTP_PORT: ${APP_GITEA_MAIN_PORT}
-      GITEA__server__SSH_LISTEN_PORT: 2222
-      GITEA__database__DB_TYPE: mysql
-      GITEA__server__DOMAIN: ${APP_DOMAIN}
-      GITEA__server__SSH_DOMAIN: ${APP_DOMAIN}
-      GITEA__database__NAME: gitea
-      GITEA__server__START_SSH_SERVER: 'true'
-      GITEA__database__PASSWD: moneyprintergobrrr
-      GITEA__database__HOST: ${APP_GITEA_DB_IP}:3306
-      GITEA__server__SSH_PORT: 2222
-      GITEA__security__INSTALL_LOCK: 'true'
-    required_ports:
-      tcp:
-        2222: 2222
-      http: null
-      udp: null
-    mounts:
-      data:
-        data/gitea/config: /etc/gitea
-        data/gitea/data: /var/lib/gitea
