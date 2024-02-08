@@ -1,7 +1,7 @@
 citadel_version: 4
 metadata:
   name: Lightning Terminal
-  version: 0.12.2-alpha
+  version: 0.12.3-alpha
   category: Lightning Node Management
   tagline: A browser-based interface for managing channel liquidity
   developers:
@@ -32,7 +32,7 @@ metadata:
   defaultPassword: $APP_SEED
 services:
   web:
-    image: lightninglabs/lightning-terminal:v0.12.2-alpha@sha256:2f0dc5651936ff703a80bd29537024a727e12f963b39af9b485a81000128c8aa
+    image: lightninglabs/lightning-terminal:v0.12.3-alpha@sha256:1de0b3d155cd77ea7b84a1163eccb5e304b6117262f6d8ef353a12f2d0dc280b
     user: 1000:1000
     command:
     - --insecure-httplisten=0.0.0.0:3000
