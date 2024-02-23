@@ -1,7 +1,7 @@
 citadel_version: 4
 metadata:
   name: Tailscale
-  version: 1.58.2
+  version: 1.60.0
   category: Networking
   tagline: A VPN to access your Citadel from anywhere
   developers:
@@ -20,7 +20,7 @@ metadata:
   defaultPassword: null
 services:
   main:
-    image: tailscale/tailscale:v1.58.2@sha256:6dc3334d142df48cdf9876152762aff4f17df46c62507f2b4fb07179882a1962
+    image: tailscale/tailscale:v1.60.0@sha256:f7f1668801442f2ebafade9792d60f7aa1ede248c89d9fe840fec9cc392b6a50
     stop_grace_period: 1m
     restart: on-failure
     command: sh -c 'tailscale web --listen 0.0.0.0:5000 & exec tailscaled --tun=userspace-networking'
