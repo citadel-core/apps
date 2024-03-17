@@ -1,7 +1,7 @@
 citadel_version: 4
 metadata:
   name: RoboSats
-  version: 0.5.4-alpha
+  version: 0.6.0-alpha
   category: Finance
   tagline: Simple and Private Bitcoin P2P Exchange
   developers:
@@ -32,14 +32,14 @@ metadata:
   defaultPassword: null
 services:
   main:
-    image: recksato/robosats-client:0.5.4-alpha@sha256:0f6171884cb581f29c25da0691723ddb87bd8b2f3612ad8a955dc29c39b6bdf0
+    image: recksato/robosats-client:0.6.0-alpha@sha256:ae5b806bef9bb6dc23899b0d1e667fcc4321f7f85c1623954a3861186000eee0
     stop_grace_period: 1m
     restart: on-failure
     init: true
     environment:
-      TOR_PROXY_IP: ${TOR_PROXY_IP}
       ROBOSATS_ONION: robosats6tkf3eva7x2voqso3a5wcorsnw34jveyxfqi2fu7oyheasid.onion
       TOR_PROXY_PORT: ${TOR_PROXY_PORT}
+      TOR_PROXY_IP: ${TOR_PROXY_IP}
     port: 12596
     mounts:
       data: {}
