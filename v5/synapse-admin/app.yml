@@ -2,7 +2,7 @@ version: 3
 metadata:
   category: Social
   name: Synapse Admin
-  version: 0.9.4
+  version: 0.10.0
   tagline: Manage your synapse server
   description: 'This app allows you to manage your synapse server. It currently requires some manual work inside Synapse''s Docker container,  so it''s not usable for most users yet. '
   developers:
@@ -16,5 +16,5 @@ metadata:
   - 3.jpg
 containers:
 - name: main
-  image: awesometechnologies/synapse-admin:0.9.4@sha256:b53748fbcc234977fb5c087699c9d5599ed1b9eef495c5dcc01563d638431cbc
+  image: awesometechnologies/synapse-admin:0.10.0@sha256:f5486ee05626ef4fb1c65fdd116691830c94bab42d638a9bd50a9cce455e9ff1
   port: 80
