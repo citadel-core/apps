@@ -1,7 +1,7 @@
 citadel_version: 4
 metadata:
   name: Specter Desktop
-  version: 2.0.2
+  version: 2.0.3
   category: Wallets
   tagline: Multisig with hardware wallets made easy
   developers:
@@ -31,17 +31,17 @@ metadata:
   defaultPassword: null
 services:
   main:
-    image: lncm/specter-desktop:v2.0.2@sha256:aeda6dfaa3f82c7bd3e1c6ba61388df02bd0c22a59412d2bbed3c792fb0b3702
+    image: lncm/specter-desktop:v2.0.3@sha256:d27be3ef15ea02c64649cea97baff1ac1e150f9e246cbc5d25eba73972101e78
     stop_signal: SIGINT
     command:
     - --host=0.0.0.0
     - --specter-data-folder=/data
     environment:
       BTC_RPC_PORT: $BITCOIN_RPC_PORT
-      BTC_RPC_USER: $BITCOIN_RPC_USER
       BTC_RPC_PASSWORD: $BITCOIN_RPC_PASS
       BTC_RPC_PROTOCOL: http
       BTC_RPC_HOST: $BITCOIN_IP
+      BTC_RPC_USER: $BITCOIN_RPC_USER
     port: 25441
     mounts:
       bitcoin: /data/.bitcoin
