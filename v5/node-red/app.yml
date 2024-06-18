@@ -2,7 +2,7 @@ version: 3
 metadata:
   category: Automation
   name: Node-RED
-  version: 3.1.10
+  version: 3.1.11
   tagline: Wire together the Internet of Things
   description: |-
     Node-RED is a visual programming tool for wiring together hardware devices, APIs and online services in new and interesting ways.
@@ -28,19 +28,19 @@ metadata:
   defaultPassword: moneyprintergobrrr
 containers:
 - name: web
-  image: nodered/node-red:3.1.10@sha256:13b5783bf170e87df18d3b881750d2b00c0164163f89ad47d03f6fc4cbe5e2d9
+  image: nodered/node-red:3.1.11@sha256:db8329d3cc6c6d6aa8bf9c558c89a1f0f33813acb73955815b32e34c15bd1df4
   data:
   - data:/data
   environment:
-    PORT: 3000
-    BITCOIN_RPC_PASS: $BITCOIN_RPC_PASS
+    LND_GRPC_PORT: 10009
+    ELECTRUM_IP: $APP_ELECTRUM_IP
+    ELECTRUM_PORT: 50001
+    BITCOIN_NETWORK: $BITCOIN_NETWORK
+    BITCOIN_RPC_PORT: $BITCOIN_RPC_PORT
     BITCOIN_RPC_USER: $BITCOIN_RPC_USER
     LND_IP: $APP_LND_SERVICE_IP
-    LND_GRPC_PORT: 10009
-    BITCOIN_NETWORK: $BITCOIN_NETWORK
     BITCOIN_IP: $BITCOIN_IP
-    ELECTRUM_IP: $APP_ELECTRUM_IP
-    BITCOIN_RPC_PORT: $BITCOIN_RPC_PORT
-    ELECTRUM_PORT: 50001
+    PORT: 3000
+    BITCOIN_RPC_PASS: $BITCOIN_RPC_PASS
   port: 3000
   stop_grace_period: 1m
