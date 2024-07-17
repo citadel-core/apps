@@ -9,7 +9,7 @@ citadel_version: 4
 metadata:
   category: Payments
   name: BTCPay Server
-  version: 1.13.4
+  version: 1.13.5
   tagline: Accept Bitcoin payments. Free, open-source & self-hosted, Bitcoin
     payment processor.
   description: "BTCPay Server is a free and open-source Bitcoin payment processor
@@ -37,7 +37,7 @@ metadata:
 services:
   main:
     port: 3000
-    image: btcpayserver/btcpayserver:1.13.4@sha256:cf9bb881518edd2c51e04aa058877c1ef379109aec41909794071b504c996ff0
+    image: btcpayserver/btcpayserver:1.13.5@sha256:c36e08c9162a268d3c4ba946c03b506738ebc1bd25a7a817c9b1fdf3daed50e8
     depends_on:
       - nbxplorer
       - postgres
